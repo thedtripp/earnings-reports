@@ -1,0 +1,26 @@
+# Earnings calendar generator configuration.
+
+watchlist = "watchlist.txt"
+companies = "companies.toml"
+output = "earnings.ics"
+
+# Include earnings dates from today up to this many days out.
+horizon_days = 90
+
+# Events are timed. No source gives an end time, so every event lasts this long.
+duration_minutes = 60
+
+# All default times are in this time zone. The .ics stores UTC.
+timezone = "America/New_York"
+
+[default_start]
+# Used when a source reports only the release timing, with no clock time.
+before_open = "08:30"
+after_close = "16:30"
+during_market = "12:00"
+# Used when no source reports the timing at all.
+not_reported = "08:30"
+
+[calendar]
+name = "Earnings calendar"
+uid_domain = "earnings-calendar"

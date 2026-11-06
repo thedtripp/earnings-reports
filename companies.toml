@@ -1,0 +1,87 @@
+# Per-company facts the sources don't provide.
+#
+# fiscal_year_end_month: month (1-12) the company's fiscal year ends. Used to
+#   turn Nasdaq's "fiscal quarter ending Oct/2026" into "Q3 FY27". Finnhub
+#   reports the fiscal quarter directly. Tickers missing here are assumed to
+#   use a December fiscal year (a warning is logged).
+# ir_url: investor-relations site, shown in event notes.
+
+[AAPL]
+fiscal_year_end_month = 9
+ir_url = "https://investor.apple.com"
+
+[NVDA]
+fiscal_year_end_month = 1
+ir_url = "https://investor.nvidia.com"
+
+[MSFT]
+fiscal_year_end_month = 6
+ir_url = "https://www.microsoft.com/en-us/investor"
+
+[AMZN]
+fiscal_year_end_month = 12
+ir_url = "https://ir.aboutamazon.com"
+
+[GOOGL]
+fiscal_year_end_month = 12
+ir_url = "https://abc.xyz/investor/"
+
+[META]
+fiscal_year_end_month = 12
+ir_url = "https://investor.atmeta.com"
+
+[AVGO]
+fiscal_year_end_month = 10
+ir_url = "https://investors.broadcom.com"
+
+[TSM]
+fiscal_year_end_month = 12
+ir_url = "https://investor.tsmc.com"
+
+[MU]
+fiscal_year_end_month = 8
+ir_url = "https://investors.micron.com"
+
+[AMD]
+fiscal_year_end_month = 12
+ir_url = "https://ir.amd.com"
+
+[ASML]
+fiscal_year_end_month = 12
+ir_url = "https://www.asml.com/en/investors"
+
+[ORCL]
+fiscal_year_end_month = 5
+ir_url = "https://investor.oracle.com"
+
+[PLTR]
+fiscal_year_end_month = 12
+ir_url = "https://investors.palantir.com"
+
+[CSCO]
+fiscal_year_end_month = 7
+ir_url = "https://investor.cisco.com"
+
+[CRM]
+fiscal_year_end_month = 1
+ir_url = "https://investor.salesforce.com"
+
+[TXN]
+fiscal_year_end_month = 12
+ir_url = "https://investor.ti.com"
+
+[IBM]
+fiscal_year_end_month = 12
+ir_url = "https://www.ibm.com/investor"
+
+[PANW]
+fiscal_year_end_month = 7
+ir_url = "https://investors.paloaltonetworks.com"
+
+[TSLA]
+fiscal_year_end_month = 12
+ir_url = "https://ir.tesla.com"
+
+[RDDT]
+fiscal_year_end_month = 12
+ir_url = "https://investor.redditinc.com"

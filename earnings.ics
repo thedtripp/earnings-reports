@@ -1,0 +1,384 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//earnings-calendar//generator v1//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Earnings calendar
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:csco-fy2027-q1@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:1
+SUMMARY:CSCO earnings\, Q1 FY27\, after close
+DTSTART:20261112T213000Z
+DTEND:20261112T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close.
+ \nStart time approximate: the sources give only "after close"\, with no cl
+ ock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Nasdaq a
+ gree.\nStatus: confirmed (Nasdaq). Finnhub does not say whether the date i
+ s confirmed.\nInvestor relations: https://investor.cisco.com
+URL:https://investor.cisco.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:nvda-fy2027-q3@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:1
+SUMMARY:NVDA earnings\, Q3 FY27\, after close
+DTSTART:20261117T213000Z
+DTEND:20261117T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close.
+ \nStart time approximate: the sources give only "after close"\, with no cl
+ ock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Nasdaq a
+ gree.\nStatus: confirmed (Nasdaq). Finnhub does not say whether the date i
+ s confirmed.\nInvestor relations: https://investor.nvidia.com
+URL:https://investor.nvidia.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:panw-fy2027-q1@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:PANW earnings\, Q1 FY27\, after close
+DTSTART:20261118T213000Z
+DTEND:20261118T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: after 
+ close.\nStart time approximate: the source gives only "after close"\, with
+  no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Na
+ sdaq agree.\nStatus: confirmed (Nasdaq). Finnhub does not say whether the 
+ date is confirmed.\nInvestor relations: https://investors.paloaltonetworks
+ .com
+URL:https://investors.paloaltonetworks.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:crm-fy2027-q3@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:CRM earnings\, Q3 FY27\, after close
+DTSTART:20261202T213000Z
+DTEND:20261202T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: time not rep
+ orted.\nStart time approximate: the source gives only "after close"\, with
+  no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Na
+ sdaq agree.\nStatus: estimated (Nasdaq). Finnhub does not say whether the 
+ date is confirmed.\nInvestor relations: https://investor.salesforce.com
+URL:https://investor.salesforce.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:orcl-fy2027-q2-20261208@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
+DTSTART:20261208T133000Z
+DTEND:20261208T143000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Tue Dec 8\, 2026) comes from Finnhub.\nNasdaq reports Wed Dec 9\,
+  2026 instead (listed as a separate DISPUTED event).\nEarnings release. Th
+ e conference call is normally the same day\, shortly after the release\; t
+ he exact call time is in the company's own announcement.\nRelease timing: 
+ Finnhub: time not reported.\nStart time approximate: no source says whethe
+ r the release is before open or after close\, so 8:30 AM EST is a placehol
+ der.\nStatus: not reported (Finnhub does not say whether the date is confi
+ rmed or estimated).\nInvestor relations: https://investor.oracle.com
+URL:https://investor.oracle.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:orcl-fy2027-q2-20261209@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
+DTSTART:20261209T133000Z
+DTEND:20261209T143000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Wed Dec 9\, 2026) comes from Nasdaq.\nFinnhub reports Tue Dec 8\,
+  2026 instead (listed as a separate DISPUTED event).\nEarnings release. Th
+ e conference call is normally the same day\, shortly after the release\; t
+ he exact call time is in the company's own announcement.\nRelease timing: 
+ Nasdaq: time not reported.\nStart time approximate: no source says whether
+  the release is before open or after close\, so 8:30 AM EST is a placehold
+ er.\nStatus: estimated (Nasdaq).\nInvestor relations: https://investor.ora
+ cle.com
+URL:https://investor.oracle.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:avgo-fy2026-q4-20261209@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: AVGO earnings\, Q4 FY26\, after close
+DTSTART:20261209T213000Z
+DTEND:20261209T223000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Wed Dec 9\, 2026) comes from Finnhub.\nNasdaq reports Thu Dec 10\
+ , 2026 instead (listed as a separate DISPUTED event).\nEarnings release. T
+ he conference call is normally the same day\, shortly after the release\; 
+ the exact call time is in the company's own announcement.\nRelease timing:
+  Finnhub: after close.\nStart time approximate: the source gives only "aft
+ er close"\, with no clock time\, so 4:30 PM EST is a default.\nStatus: not
+  reported (Finnhub does not say whether the date is confirmed or estimated
+ ).\nInvestor relations: https://investors.broadcom.com
+URL:https://investors.broadcom.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:avgo-fy2026-q4-20261210@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: AVGO earnings\, Q4 FY26\, time not reported
+DTSTART:20261210T133000Z
+DTEND:20261210T143000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Thu Dec 10\, 2026) comes from Nasdaq.\nFinnhub reports Wed Dec 9\
+ , 2026 instead (listed as a separate DISPUTED event).\nEarnings release. T
+ he conference call is normally the same day\, shortly after the release\; 
+ the exact call time is in the company's own announcement.\nRelease timing:
+  Nasdaq: time not reported.\nStart time approximate: no source says whethe
+ r the release is before open or after close\, so 8:30 AM EST is a placehol
+ der.\nStatus: estimated (Nasdaq).\nInvestor relations: https://investors.b
+ roadcom.com
+URL:https://investors.broadcom.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mu-fy2027-q1-20261215@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, after close
+DTSTART:20261215T213000Z
+DTEND:20261215T223000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Tue Dec 15\, 2026) comes from Finnhub.\nNasdaq reports Wed Dec 16
+ \, 2026 instead (listed as a separate DISPUTED event).\nEarnings release. 
+ The conference call is normally the same day\, shortly after the release\;
+  the exact call time is in the company's own announcement.\nRelease timing
+ : Finnhub: after close.\nStart time approximate: the source gives only "af
+ ter close"\, with no clock time\, so 4:30 PM EST is a default.\nStatus: no
+ t reported (Finnhub does not say whether the date is confirmed or estimate
+ d).\nInvestor relations: https://investors.micron.com
+URL:https://investors.micron.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mu-fy2027-q1-20261216@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, time not reported
+DTSTART:20261216T133000Z
+DTEND:20261216T143000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Wed Dec 16\, 2026) comes from Nasdaq.\nFinnhub reports Tue Dec 15
+ \, 2026 instead (listed as a separate DISPUTED event).\nEarnings release. 
+ The conference call is normally the same day\, shortly after the release\;
+  the exact call time is in the company's own announcement.\nRelease timing
+ : Nasdaq: time not reported.\nStart time approximate: no source says wheth
+ er the release is before open or after close\, so 8:30 AM EST is a placeho
+ lder.\nStatus: estimated (Nasdaq).\nInvestor relations: https://investors.
+ micron.com
+URL:https://investors.micron.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:txn-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:TXN earnings\, Q4 FY26\, after close
+DTSTART:20270125T213000Z
+DTEND:20270125T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://investor.ti.com
+URL:https://investor.ti.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:msft-fy2027-q2@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:MSFT earnings\, Q2 FY27\, time not reported
+DTSTART:20270126T133000Z
+DTEND:20270126T143000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: time not reported.\nStart time app
+ roximate: no source says whether the release is before open or after close
+ \, so 8:30 AM EST is a placeholder.\nDate source: Finnhub only (Nasdaq has
+  no date for this quarter).\nStatus: not reported (Finnhub does not say wh
+ ether the date is confirmed or estimated).\nInvestor relations: https://ww
+ w.microsoft.com/en-us/investor
+URL:https://www.microsoft.com/en-us/investor
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ibm-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:IBM earnings\, Q4 FY26\, after close
+DTSTART:20270126T213000Z
+DTEND:20270126T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://www.ibm.com/investor
+URL:https://www.ibm.com/investor
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:meta-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:META earnings\, Q4 FY26\, after close
+DTSTART:20270126T213000Z
+DTEND:20270126T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://investor.atmeta.com
+URL:https://investor.atmeta.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:tsla-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:TSLA earnings\, Q4 FY26\, after close
+DTSTART:20270126T213000Z
+DTEND:20270126T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://ir.tesla.com
+URL:https://ir.tesla.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:aapl-fy2027-q1@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:AAPL earnings\, Q1 FY27\, time not reported
+DTSTART:20270127T133000Z
+DTEND:20270127T143000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: time not reported.\nStart time app
+ roximate: no source says whether the release is before open or after close
+ \, so 8:30 AM EST is a placeholder.\nDate source: Finnhub only (Nasdaq has
+  no date for this quarter).\nStatus: not reported (Finnhub does not say wh
+ ether the date is confirmed or estimated).\nInvestor relations: https://in
+ vestor.apple.com
+URL:https://investor.apple.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:amd-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:AMD earnings\, Q4 FY26\, after close
+DTSTART:20270201T213000Z
+DTEND:20270201T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://ir.amd.com
+URL:https://ir.amd.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:pltr-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:PLTR earnings\, Q4 FY26\, after close
+DTSTART:20270201T213000Z
+DTEND:20270201T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://investors.palantir.c
+ om
+URL:https://investors.palantir.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:googl-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:GOOGL earnings\, Q4 FY26\, after close
+DTSTART:20270202T213000Z
+DTEND:20270202T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://abc.xyz/investor/
+URL:https://abc.xyz/investor/
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:amzn-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:AMZN earnings\, Q4 FY26\, after close
+DTSTART:20270203T213000Z
+DTEND:20270203T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://ir.aboutamazon.com
+URL:https://ir.aboutamazon.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:rddt-fy2026-q4@earnings-calendar
+DTSTAMP:20261106T000000Z
+SEQUENCE:0
+SUMMARY:RDDT earnings\, Q4 FY26\, after close
+DTSTART:20270203T213000Z
+DTEND:20270203T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close.\nStart time approxima
+ te: the source gives only "after close"\, with no clock time\, so 4:30 PM 
+ EST is a default.\nDate source: Finnhub only (Nasdaq has no date for this 
+ quarter).\nStatus: not reported (Finnhub does not say whether the date is 
+ confirmed or estimated).\nInvestor relations: https://investor.redditinc.c
+ om
+URL:https://investor.redditinc.com
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

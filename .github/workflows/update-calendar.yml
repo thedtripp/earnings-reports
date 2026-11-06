@@ -1,0 +1,49 @@
+name: Update earnings calendar
+
+on:
+  schedule:
+    # Daily at 10:41 UTC (5:41 AM EST / 6:41 AM EDT), before the US market opens.
+    - cron: "41 10 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-earnings-calendar
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests
+
+      # Exits nonzero and leaves earnings.ics untouched if either source fails,
+      # which fails this job (and GitHub emails you) instead of publishing a
+      # calendar with real events missing.
+      - name: Generate earnings.ics
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: python generate.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- earnings.ics && git ls-files --error-unmatch earnings.ics >/dev/null 2>&1; then
+            echo "earnings.ics unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add earnings.ics
+          git commit -m "Update earnings calendar"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
