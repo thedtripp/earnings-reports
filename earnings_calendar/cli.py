@@ -12,7 +12,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from . import core, ics
-from .sources import Finnhub, Nasdaq, SourceUnavailable, urllib_get
+from .sources import AlphaVantage, Finnhub, Nasdaq, SourceUnavailable, urllib_get
 
 log = logging.getLogger("earnings_calendar")
 
@@ -77,7 +77,8 @@ def main(argv=None, http_get=urllib_get, env=None, sources=None) -> int:
 
     if sources is None:
         sources = [Finnhub(env.get("FINNHUB_API_KEY"), http_get=http_get),
-                   Nasdaq(fye, http_get=http_get)]
+                   Nasdaq(fye, http_get=http_get),
+                   AlphaVantage(env.get("ALPHAVANTAGE_API_KEY"), fye, http_get=http_get)]
 
     reports = {t: [] for t in tickers}
     failed = []

@@ -27,12 +27,13 @@ jobs:
       - name: Run tests
         run: python -m unittest discover -s tests
 
-      # Exits nonzero and leaves earnings.ics untouched if either source fails,
+      # Exits nonzero and leaves earnings.ics untouched if any source fails,
       # which fails this job (and GitHub emails you) instead of publishing a
       # calendar with real events missing.
       - name: Generate earnings.ics
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
         run: python generate.py
 
       - name: Commit if changed

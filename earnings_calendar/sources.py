@@ -1,4 +1,4 @@
-"""The two earnings-date sources: Finnhub and Nasdaq.
+"""The earnings-date sources: Finnhub, Nasdaq and Alpha Vantage.
 
 Each source returns a list of Report records for one ticker, or raises
 SourceUnavailable. A source that fails is unavailable, never empty: callers
@@ -7,14 +7,17 @@ must not treat a failure as "no earnings dates".
 
 from __future__ import annotations
 
+import csv
+import io
 import json
+import logging
 import re
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from typing import Callable
 
 # Release timing values, shared by both sources.
@@ -62,10 +65,15 @@ def urllib_get(url: str, headers: dict, timeout: float = 30.0) -> tuple[int, byt
         return e.code, e.read() or b""
 
 
-def get_json(source: str, http_get: HttpGet, url: str, headers: dict,
-             retries: int = 3, backoff: float = 2.0,
-             sleep: Callable[[float], None] | None = None):
+def get_json(source: str, http_get: HttpGet, url: str, headers: dict, **kw):
     """GET a JSON document, retrying transient failures, else SourceUnavailable."""
+    return get(source, http_get, url, headers, parse=json.loads, **kw)
+
+
+def get(source: str, http_get: HttpGet, url: str, headers: dict, parse,
+        retries: int = 3, backoff: float = 2.0,
+        sleep: Callable[[float], None] | None = None):
+    """GET and parse a document, retrying transient failures, else SourceUnavailable."""
     last = "no attempt made"
     for attempt in range(retries):
         if attempt:
@@ -85,15 +93,15 @@ def get_json(source: str, http_get: HttpGet, url: str, headers: dict,
             # 401/403/404 and friends will not fix themselves on retry.
             raise SourceUnavailable(source, f"HTTP {status} for {redact(url)}")
         try:
-            return json.loads(body)
-        except ValueError:
-            last = "response was not valid JSON"
+            return parse(body)
+        except ValueError as e:
+            last = f"bad response: {e}"
             continue
     raise SourceUnavailable(source, f"{last} for {redact(url)}")
 
 
 def redact(url: str) -> str:
-    return re.sub(r"(token=)[^&]+", r"\1***", url)
+    return re.sub(r"((?:token|apikey)=)[^&]+", r"\1***", url)
 
 
 # ---------------------------------------------------------------- Finnhub
@@ -270,3 +278,100 @@ class Nasdaq:
                 pe.month, pe.year, self.fye_months.get(ticker, 12))
         return [Report(source=self.name, ticker=ticker, date=day, timing=timing,
                        fiscal_year=fy, fiscal_quarter=fq, status=status)]
+
+
+# ---------------------------------------------------------- Alpha Vantage
+
+log = logging.getLogger("earnings_calendar")
+
+ALPHA_VANTAGE_TIMING = {
+    "pre-market": BEFORE_OPEN,
+    "post-market": AFTER_CLOSE,
+    "": NOT_REPORTED,
+}
+_AV_COLUMNS = ["symbol", "name", "reportDate", "fiscalDateEnding"]
+
+
+def period_end_month(day: date) -> tuple[int, int]:
+    """The month a fiscal period "ends in", for quarter labelling.
+
+    Some companies end quarters on a weekday near the month boundary (Broadcom
+    on ~Nov 1, Micron on ~Sep 3). An end date in the first week of a month
+    belongs to the previous month, as Nasdaq labels it.
+    """
+    if day.day <= 7:
+        prev = day.replace(day=1) - timedelta(days=1)
+        return prev.month, prev.year
+    return day.month, day.year
+
+
+def parse_alpha_vantage_csv(body: bytes) -> list[dict]:
+    text = body.decode("utf-8-sig")
+    rows = list(csv.DictReader(io.StringIO(text)))
+    header = list(rows[0].keys()) if rows else text.splitlines()[:1]
+    if not rows and text.strip().split(",")[:4] == _AV_COLUMNS:
+        return []  # a valid file with no rows
+    if not rows or header[:4] != _AV_COLUMNS:
+        # Errors and rate-limit notices come back as JSON with HTTP 200.
+        raise ValueError(f"not an earnings calendar CSV: {text[:200]!r}")
+    return rows
+
+
+class AlphaVantage:
+    """Alpha Vantage EARNINGS_CALENDAR (free tier, API key).
+
+    One request returns every company for the next three months, so a run
+    costs one of the free tier's 25 daily requests. Reports fiscal period end
+    and release timing, but not whether a date is confirmed.
+    """
+
+    name = "Alpha Vantage"
+    url = "https://www.alphavantage.co/query"
+
+    def __init__(self, api_key: str | None, fye_months: dict[str, int],
+                 http_get: HttpGet = urllib_get, **kw):
+        self.api_key = api_key
+        self.fye_months = fye_months
+        self.http_get = http_get
+        self.kw = kw
+        self._rows: dict[str, list[dict]] | None = None
+
+    def _load(self):
+        if self._rows is None:
+            if not self.api_key:
+                raise SourceUnavailable(self.name, "ALPHAVANTAGE_API_KEY is not set")
+            # Alpha Vantage only accepts the key as a query parameter.
+            query = urllib.parse.urlencode({"function": "EARNINGS_CALENDAR",
+                                            "horizon": "3month", "apikey": self.api_key})
+            rows = get(self.name, self.http_get, f"{self.url}?{query}", {},
+                       parse=parse_alpha_vantage_csv, **self.kw)
+            self._rows = {}
+            for row in rows:
+                self._rows.setdefault((row.get("symbol") or "").upper(), []).append(row)
+        return self._rows
+
+    def fetch(self, ticker: str, start: date, end: date) -> list[Report]:
+        reports = []
+        for row in self._load().get(ticker, []):
+            try:
+                day = date.fromisoformat(row["reportDate"])
+            except (KeyError, TypeError, ValueError):
+                raise SourceUnavailable(self.name, f"bad reportDate for {ticker}: {row!r}")
+            if not (start <= day <= end):
+                continue
+            raw_timing = (row.get("timeOfTheDay") or "").strip()
+            timing = ALPHA_VANTAGE_TIMING.get(raw_timing)
+            if timing is None:
+                log.warning("%s: unknown timeOfTheDay %r for %s; treating as not reported",
+                            self.name, raw_timing, ticker)
+                timing = NOT_REPORTED
+            fy = fq = None
+            if row.get("fiscalDateEnding"):
+                try:
+                    m, y = period_end_month(date.fromisoformat(row["fiscalDateEnding"]))
+                except ValueError:
+                    raise SourceUnavailable(self.name, f"bad fiscalDateEnding for {ticker}: {row!r}")
+                fy, fq = fiscal_quarter_from_period_end(m, y, self.fye_months.get(ticker, 12))
+            reports.append(Report(source=self.name, ticker=ticker, date=day, timing=timing,
+                                  fiscal_year=fy, fiscal_quarter=fq, status=STATUS_NOT_REPORTED))
+        return reports

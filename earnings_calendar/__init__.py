@@ -1,1 +1,1 @@
-"""Earnings calendar generator: two sources in, one .ics file out."""
+"""Earnings calendar generator: three sources in, one .ics file out."""

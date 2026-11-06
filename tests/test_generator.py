@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from earnings_calendar import cli, ics  # noqa: E402
-from earnings_calendar.sources import fiscal_quarter_from_period_end  # noqa: E402
+from earnings_calendar.sources import fiscal_quarter_from_period_end, period_end_month  # noqa: E402
 
 TODAY = "2026-11-06"
 
@@ -42,12 +42,24 @@ class FakeWeb:
     nasdaq:  ticker -> (reportText, calendar row or None)
     """
 
-    def __init__(self, finnhub=None, nasdaq=None, fail=None):
+    def __init__(self, finnhub=None, nasdaq=None, alpha=None, fail=None, alpha_body=None):
         self.finnhub = finnhub or {}
         self.nasdaq = nasdaq or {}
-        self.fail = fail  # "Finnhub" or "Nasdaq": that source's requests error out
+        self.alpha = alpha or []  # list of CSV rows (dicts)
+        self.alpha_body = alpha_body  # raw body override, e.g. a rate-limit notice
+        self.fail = fail  # a source name: that source's requests error out
 
     def __call__(self, url, headers):
+        if "alphavantage.co" in url:
+            if self.fail == "Alpha Vantage":
+                raise OSError("timed out")
+            if self.alpha_body is not None:
+                return 200, self.alpha_body
+            cols = ["symbol", "name", "reportDate", "fiscalDateEnding", "estimate",
+                    "currency", "timeOfTheDay"]
+            lines = [",".join(cols)] + [
+                ",".join(str(r.get(c, "")) for c in cols) for r in self.alpha]
+            return 200, ("\r\n".join(lines) + "\r\n").encode()
         if "finnhub.io" in url:
             if self.fail == "Finnhub":
                 raise OSError("connection refused")
@@ -76,10 +88,19 @@ def nq_row(day, time="time-after-hours", period="Oct/2026"):
     return {"_date": day, "time": time, "fiscalQuarterEnding": period}
 
 
+def av(sym, day, period_end="2026-10-31", timing="post-market"):
+    return {"symbol": sym, "name": "Example", "reportDate": day,
+            "fiscalDateEnding": period_end, "currency": "USD", "timeOfTheDay": timing}
+
+
 def nvda_web(**kw):
     return FakeWeb(
         finnhub={"NVDA": [fh("NVDA", "2026-11-25")]},
-        nasdaq={"NVDA": (nasdaq_text("11/25/2026"), nq_row("2026-11-25"))}, **kw)
+        nasdaq={"NVDA": (nasdaq_text("11/25/2026"), nq_row("2026-11-25"))},
+        alpha=[av("NVDA", "2026-11-25")], **kw)
+
+
+KEYS = {"FINNHUB_API_KEY": "test-key", "ALPHAVANTAGE_API_KEY": "test-key"}
 
 
 class Workspace:
@@ -93,7 +114,7 @@ class Workspace:
         self.ics = self.dir / "earnings.ics"
 
     def run(self, web, today=TODAY, env=None):
-        env = {"FINNHUB_API_KEY": "test-key"} if env is None else env
+        env = KEYS if env is None else env
         return cli.main(["--config", str(self.dir / "config.toml"), "--today", today],
                         http_get=web, env=env)
 
@@ -141,7 +162,7 @@ class AcceptanceTests(unittest.TestCase):
         self.assertEqual(ev.props["DTEND"], "20261125T223000Z")
         notes = description(ev)
         self.assertIn("Start time approximate", notes)
-        self.assertIn("Date source: Finnhub and Nasdaq agree.", notes)
+        self.assertIn("Date source: Finnhub, Nasdaq and Alpha Vantage agree.", notes)
         self.assertIn("confirmed (Nasdaq)", notes)
         self.assertIn("https://investor.nvidia.com", notes)
 
@@ -205,7 +226,7 @@ class AcceptanceTests(unittest.TestCase):
                 "sources.time.sleep = lambda s: None\n"
                 "sys.exit(cli.main(sys.argv[1:], http_get=t.nvda_web()))\n")
             env = {k: v for k, v in os.environ.items() if k not in ("GITHUB_ACTIONS", "CI")}
-            env.update(env_extra, FINNHUB_API_KEY="test-key", TZ="Asia/Tokyo" if env_extra else "UTC")
+            env.update(env_extra, **KEYS, TZ="Asia/Tokyo" if env_extra else "UTC")
             subprocess.run([sys.executable, str(script), "--config", str(w.dir / "config.toml"),
                             "--today", TODAY], cwd=tempfile.gettempdir(), env=env, check=True,
                            capture_output=True)
@@ -214,7 +235,7 @@ class AcceptanceTests(unittest.TestCase):
 
     # 5. With a source failing, the published file is untouched and exit is nonzero.
     def test_5_failed_source_publishes_nothing(self):
-        for failing in ("Finnhub", "Nasdaq"):
+        for failing in ("Finnhub", "Nasdaq", "Alpha Vantage"):
             with self.subTest(failing=failing):
                 w = self.ws(["NVDA"])
                 self.assertEqual(w.run(nvda_web()), 0)
@@ -228,8 +249,36 @@ class AcceptanceTests(unittest.TestCase):
         w = self.ws(["NVDA"])
         self.assertEqual(w.run(nvda_web()), 0)
         before = w.ics.read_bytes()
-        self.assertNotEqual(w.run(nvda_web(), env={}), 0)
+        for env in ({}, {"FINNHUB_API_KEY": "k"}, {"ALPHAVANTAGE_API_KEY": "k"}):
+            self.assertNotEqual(w.run(nvda_web(), env=env), 0)
+            self.assertEqual(w.ics.read_bytes(), before)
+
+    def test_5c_alpha_vantage_rate_limit_notice_is_a_failure(self):
+        # Alpha Vantage reports rate limits as JSON with HTTP 200.
+        w = self.ws(["NVDA"])
+        self.assertEqual(w.run(nvda_web()), 0)
+        before = w.ics.read_bytes()
+        notice = b'{"Information": "We have detected your API key and our standard API rate limit is 25 requests per day."}'
+        self.assertNotEqual(w.run(nvda_web(alpha_body=notice), today="2026-11-07"), 0)
         self.assertEqual(w.ics.read_bytes(), before)
+
+    def test_2b_three_sources_two_dates(self):
+        w = self.ws(["MU"])
+        web = FakeWeb(
+            finnhub={"MU": [fh("MU", "2026-12-15", q=1, y=2027)]},
+            nasdaq={"MU": (nasdaq_text("12/16/2026", confirmed=False),
+                           nq_row("2026-12-16", time="time-not-supplied", period="Nov/2026"))},
+            # Micron's quarter ends on a Thursday near month end; Sep 3 style
+            # dates must still map to the right quarter.
+            alpha=[av("MU", "2026-12-16", period_end="2026-11-30", timing="")])
+        self.assertEqual(w.run(web), 0)
+        events = sorted(w.events().values(), key=lambda e: e.props["DTSTART"])
+        self.assertEqual([summary(e) for e in events],
+                         ["DISPUTED: MU earnings, Q1 FY27, after close",
+                          "DISPUTED: MU earnings, Q1 FY27, time not reported"])
+        self.assertIn("comes from Finnhub.", description(events[0]))
+        self.assertIn("Nasdaq and Alpha Vantage report Wed Dec 16, 2026 instead", description(events[0]))
+        self.assertIn("comes from Nasdaq and Alpha Vantage.", description(events[1]))
 
 
 class BehaviourTests(unittest.TestCase):
@@ -255,7 +304,7 @@ class BehaviourTests(unittest.TestCase):
         ev, = w.events().values()
         self.assertEqual(summary(ev), "AAPL earnings, Q1 FY27, time not reported")
         self.assertEqual(ev.props["DTSTART"], "20270127T133000Z")  # 8:30 AM EST
-        self.assertIn("Finnhub only (Nasdaq has no date", description(ev))
+        self.assertIn("Finnhub only (Nasdaq and Alpha Vantage have no date", description(ev))
         self.assertIn("Start time approximate", description(ev))
 
     def test_daylight_saving_before_open(self):
@@ -272,6 +321,11 @@ class BehaviourTests(unittest.TestCase):
         self.assertEqual(fiscal_quarter_from_period_end(9, 2026, 12), (2026, 3))   # calendar FY
         self.assertEqual(fiscal_quarter_from_period_end(10, 2026, 10), (2026, 4))  # AVGO
         self.assertEqual(fiscal_quarter_from_period_end(11, 2026, 8), (2027, 1))   # MU
+        from datetime import date
+        self.assertEqual(period_end_month(date(2026, 11, 1)), (10, 2026))  # AVGO's Nov 1 end
+        self.assertEqual(period_end_month(date(2026, 9, 3)), (8, 2026))    # MU's Sep 3 end
+        self.assertEqual(period_end_month(date(2027, 1, 2)), (12, 2026))
+        self.assertEqual(period_end_month(date(2026, 10, 31)), (10, 2026))
 
     def test_unrecognized_nasdaq_text_is_a_failure(self):
         w = self.ws(["NVDA"])

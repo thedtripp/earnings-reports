@@ -60,6 +60,10 @@ def join(names) -> str:
     return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
 
 
+def verb(names) -> str:
+    return "does" if len(list(names)) == 1 else "do"
+
+
 def quarter_key(r: Report):
     if r.fiscal_year is None or r.fiscal_quarter is None:
         return None
@@ -170,7 +174,8 @@ def make_event(ticker, quarter, day, day_reports, others, all_reports, disputed,
         notes.append("DISPUTED: the sources disagree on the date of this release.")
         notes.append(f"This date ({fmt_day(day)}) comes from {join(here)}.")
         for d, rs in sorted(others.items()):
-            notes.append(f"{join(ordered_sources(rs, s))} reports {fmt_day(d)} instead "
+            names = ordered_sources(rs, s)
+            notes.append(f"{join(names)} {'reports' if len(names) == 1 else 'report'} {fmt_day(d)} instead "
                          "(listed as a separate DISPUTED event).")
     notes.append("Earnings release. The conference call is normally the same day, shortly "
                  "after the release; the exact call time is in the company's own announcement.")
@@ -195,7 +200,8 @@ def make_event(ticker, quarter, day, day_reports, others, all_reports, disputed,
     if not disputed:
         missing = [n for n in s.source_names if n not in here]
         if missing:
-            notes.append(f"Date source: {join(here)} only ({join(missing)} has no date for "
+            notes.append(f"Date source: {join(here)} only ({join(missing)} "
+                         f"{'has' if len(missing) == 1 else 'have'} no date for "
                          "this quarter).")
         else:
             notes.append(f"Date source: {join(here)} agree.")
@@ -205,10 +211,10 @@ def make_event(ticker, quarter, day, day_reports, others, all_reports, disputed,
     if statuses:
         status = "; ".join(f"{st} ({src})" for src, st in statuses)
         if silent:
-            status += f". {join(silent)} does not say whether the date is confirmed"
+            status += f". {join(silent)} {verb(silent)} not say whether the date is confirmed"
         notes.append(f"Status: {status}.")
     else:
-        notes.append(f"Status: not reported ({join(here)} does not say whether the date is "
+        notes.append(f"Status: not reported ({join(here)} {verb(here)} not say whether the date is "
                      "confirmed or estimated).")
 
     ir = (s.ir_urls or {}).get(ticker)

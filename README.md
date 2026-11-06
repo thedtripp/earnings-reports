@@ -2,7 +2,8 @@
 
 Keeps earnings dates for a watchlist in Google Calendar, automatically.
 
-- **Generator** (`generate.py`): fetches dates from Finnhub and Nasdaq, compares
+- **Generator** (`generate.py`): fetches dates from Finnhub, Nasdaq and Alpha
+  Vantage, compares
   them, and writes one standard calendar file, `earnings.ics`. That's all it does.
 - **Loader**: none in v1. Google Calendar subscribes to the published
   `earnings.ics` and loads it itself.
@@ -17,9 +18,12 @@ day, shortly after. No source gives clock times, so start times are defaults
 
 ## Setup
 
-1. **Finnhub key.** Get a free API key at finnhub.io. In the GitHub repo, go to
-   Settings → Secrets and variables → Actions → New repository secret, name it
-   `FINNHUB_API_KEY`, and paste the key. Never commit the key.
+1. **API keys.** In the GitHub repo, go to Settings → Secrets and variables →
+   Actions → New repository secret, and add two secrets:
+   - `FINNHUB_API_KEY`: a free key from finnhub.io
+   - `ALPHAVANTAGE_API_KEY`: a free key from alphavantage.co
+
+   This repo is public, so never commit a key.
 2. **Default branch.** Scheduled workflows only run on the default branch. Merge
    this branch into it (or make it the default) so the daily job runs there.
 3. **Public repo.** Google can subscribe only to a public URL, so the repo
@@ -44,6 +48,7 @@ day, subscribed events are read-only, and this is not a last-minute alert system
 
 ```sh
 export FINNHUB_API_KEY=your-key
+export ALPHAVANTAGE_API_KEY=your-key
 python3 generate.py            # writes earnings.ics next to config.toml
 python3 generate.py --today 2026-11-06 -v   # pretend date, verbose log
 python3 -m unittest discover -s tests       # offline acceptance tests
@@ -66,23 +71,27 @@ Exit codes: `0` success, `1` a source was unavailable (nothing written),
 - **Per ticker per fiscal quarter.** Finnhub reports the fiscal quarter
   directly. Nasdaq reports the fiscal quarter's end month (for example
   "Oct/2026"), which `companies.toml` converts (NVDA's FY ends in January, so
-  Oct 2026 is Q3 FY27). If the two sources label nearby dates with different
+  Oct 2026 is Q3 FY27). Alpha Vantage's period-end date is converted the same way. If two sources label nearby dates with different
   quarters, they're treated as the same quarter and a warning is logged (the
   usual cause is a wrong `fiscal_year_end_month`).
-- **Agree:** one event, notes say both sources agree.
+- **All three sources are equal.** Alpha Vantage is not a tiebreaker: if any
+  dates differ, every date becomes its own DISPUTED event. The notes say which
+  sources back each date (for example "Nasdaq and Alpha Vantage" against
+  "Finnhub"), so you can see the majority, but nothing is dropped.
+- **Agree:** one event, notes say the sources agree.
 - **Disagree on the date:** one event per date, title prefixed `DISPUTED: `,
-  notes name the source behind that date and the other source's date. Neither
+  notes name the sources behind that date and the other dates reported. Neither
   date is picked as the winner.
-- **Only one source has a date:** one event, notes say which source.
+- **Some sources have no date:** one event, notes say which sources have it.
 - **Status:** Nasdaq says whether a date is confirmed by the company or
-  estimated by an algorithm. Finnhub doesn't say, and the notes state that.
+  estimated by an algorithm. Finnhub and Alpha Vantage don't say, and the notes state that.
 - **UIDs:** `nvda-fy2027-q3@earnings-calendar`. A disputed event adds the
   date: `avgo-fy2026-q4-20261209@earnings-calendar`. On each run the
   generator reads the previous `earnings.ics` and bumps `SEQUENCE` only when the
   title, time, notes or URL changed, so Google updates the event instead of
   adding a duplicate. Unchanged runs give a byte-identical file, so the job
   commits only on real changes.
-- **Failures:** if either source fails (network error, bad or unrecognized
+- **Failures:** if any source fails (network error, bad or unrecognized
   response, rate limit, missing key), the generator writes nothing, leaves the
   previous `earnings.ics` byte-identical, and exits `1`. The Actions run then
   fails visibly instead of quietly deleting real events.
@@ -97,10 +106,16 @@ Exit codes: `0` success, `1` a source was unavailable (nothing written),
   status. The calendar for that day gives the release timing and fiscal
   quarter. Being unofficial, it can change format or block traffic from some
   networks. Either one fails the run, which is the intended loud failure.
-- Coverage gaps are normal: a company with no date yet in either source (often
+- **Alpha Vantage** (`EARNINGS_CALENDAR`, free tier, key): one request
+  returns every company for the next three months as CSV, so a run uses 1 of
+  the free tier's 25 requests per day. It gives fiscal period end and
+  pre-/post-market timing, but no confirmed status. Rate-limit notices come
+  back as JSON with HTTP 200; the generator treats those as a failure. The key
+  has to go in the URL (`apikey=`). Logs redact it.
+- Coverage gaps are normal: a company with no date yet in any source (often
   a foreign filer like TSM or ASML until it announces) simply has no event.
 
 ## Roadmap (not built)
 
 Disagreement notifications; a Google Calendar API loader with per-event
-reminders; a third source as tiebreaker.
+reminders.
