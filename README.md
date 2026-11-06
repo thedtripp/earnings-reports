@@ -117,6 +117,21 @@ syncs.
 - If a source fails, the Actions run fails and GitHub emails you. The
   calendar keeps its last good version until a run succeeds.
 
+## One-off manual import (no subscription)
+
+To get the dates into Google Calendar before the setup above is finished:
+
+1. Get a fresh `earnings.ics`: run the generator (see "Running locally"), or
+   download the one in this repo.
+2. On a computer: calendar.google.com → **Other calendars** → **+** → **Create
+   new calendar**, and name it something like "Earnings (manual import)".
+3. **Settings** (gear icon) → **Import & export** → **Import** → choose
+   `earnings.ics` → **Add to calendar**: the new calendar → **Import**.
+
+Imported events are a one-time copy. They don't update when a date moves, and
+past events stay. Importing into a separate calendar lets you delete it in one
+step once the subscription is set up, so you don't see every event twice.
+
 ## Running locally
 
 ```sh
