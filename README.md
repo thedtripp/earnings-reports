@@ -2,9 +2,8 @@
 
 Keeps earnings dates for a watchlist in Google Calendar, automatically.
 
-- **Generator** (`generate.py`): fetches dates from Finnhub, Nasdaq and Alpha
-  Vantage, compares
-  them, and writes one standard calendar file, `earnings.ics`. That's all it does.
+- **Generator** (`generate.py`): fetches dates from Finnhub, Nasdaq and
+  Alpha Vantage, compares them, and writes one standard calendar file, `earnings.ics`. That's all it does.
 - **Loader**: none in v1. Google Calendar subscribes to the published
   `earnings.ics` and loads it itself.
 - **Runtime**: a GitHub Actions job runs the generator daily and commits
@@ -16,33 +15,107 @@ day, shortly after. No source gives clock times, so start times are defaults
 (8:30 AM ET before open, 4:30 PM ET after close) and the notes say
 "start time approximate".
 
-## Setup
+## Setup checklist (still to do)
 
-1. **API keys.** In the GitHub repo, go to Settings → Secrets and variables →
-   Actions → New repository secret, and add two secrets:
-   - `FINNHUB_API_KEY`: a free key from finnhub.io
-   - `ALPHAVANTAGE_API_KEY`: a free key from alphavantage.co
+The code, tests, workflow and a first `earnings.ics` are already in the repo.
+These steps are left, in this order. Each is done once, in a web browser.
 
-   This repo is public, so never commit a key.
-2. **Default branch.** Scheduled workflows only run on the default branch. Merge
-   this branch into it (or make it the default) so the daily job runs there.
-3. **Public repo.** Google can subscribe only to a public URL, so the repo
-   must be public.
-4. **First run.** Actions tab → "Update earnings calendar" → Run workflow. Make
-   sure it goes green.
-5. **Subscribe in Google Calendar.** On a computer: Other calendars → **+** → From URL,
-   and paste:
+### 1. Rename the branch to `main`
 
-   ```
-   https://raw.githubusercontent.com/thedtripp/earnings-reports/<default-branch>/earnings.ics
-   ```
+Right now the repo's only branch is `claude/friendly-hopper-ng9fkq`. GitHub
+made it the default because it was pushed first. Scheduled workflows only run
+on the default branch, and the subscription URL names the branch, so give it a
+permanent name before anything else depends on it.
 
-6. **Reminders.** Google Calendar settings → the subscribed calendar → set a
-   default notification (for example, 1 day before). Subscribed calendars
-   can't have per-event reminders.
+- github.com/thedtripp/earnings-reports → **Settings** → **General** →
+  **Default branch** → the pencil icon next to the branch name → rename it to
+  `main` → **Rename branch**.
 
-Known limits (accepted for v1): Google refreshes subscriptions roughly once a
-day, subscribed events are read-only, and this is not a last-minute alert system.
+### 2. Make sure the repo is public
+
+Google Calendar can only subscribe to a URL anyone can open.
+
+- **Settings** → **General** → scroll to **Danger Zone** → **Change repository
+  visibility**. If it says "Change to private", the repo is already public and
+  there's nothing to do.
+
+### 3. Get the two API keys
+
+Both are free.
+
+- **Finnhub:** sign up at finnhub.io. The key is on the dashboard.
+- **Alpha Vantage:** alphavantage.co → **Get free API key**. If you posted an
+  earlier key anywhere (a chat, a screenshot), request a fresh one and use that.
+
+### 4. Add the keys as repository secrets
+
+- **Settings** → **Secrets and variables** → **Actions** → **New repository
+  secret**. Add two secrets, with exactly these names:
+
+  | Name | Value |
+  | --- | --- |
+  | `FINNHUB_API_KEY` | your Finnhub key |
+  | `ALPHAVANTAGE_API_KEY` | your Alpha Vantage key |
+
+Secrets are hidden from the public. Never put a key in a file in this repo,
+because the repo is public.
+
+### 5. Run the workflow once by hand
+
+- **Actions** tab → if GitHub asks, click **I understand my workflows, go
+  ahead and enable them** → **Update earnings calendar** → **Run workflow** →
+  branch `main` → **Run workflow**.
+- Wait for the green check (about 2 minutes, mostly Nasdaq).
+  - **Red at "Generate earnings.ics"**: open the log. "FINNHUB_API_KEY is not
+    set" or "ALPHAVANTAGE_API_KEY is not set" means a secret name is wrong.
+    "HTTP 401" or "HTTP 403" from Finnhub means a bad key. A Nasdaq failure
+    may mean Nasdaq is blocking GitHub's servers (see "Notes on the sources").
+    In every failure case, the published calendar is left unchanged.
+  - **Red at "Commit if changed"** with "Permission denied" or "403": go to
+    **Settings** → **Actions** → **General** → **Workflow permissions** →
+    choose **Read and write permissions** → **Save**, then run it again.
+
+From then on it runs by itself every day at 10:41 UTC.
+
+### 6. Subscribe in Google Calendar
+
+This step needs a computer. The Google Calendar phone app can't add a
+calendar by URL.
+
+- calendar.google.com → in the left sidebar, **Other calendars** → **+** →
+  **From URL** → paste:
+
+  ```
+  https://raw.githubusercontent.com/thedtripp/earnings-reports/main/earnings.ics
+  ```
+
+  → **Add calendar**. Events can take a few hours to appear the first time.
+- To check the URL works, open it in a browser. You should see text that
+  starts with `BEGIN:VCALENDAR`.
+
+### 7. Set reminders
+
+Subscribed calendars can't have per-event reminders, so set one for the
+whole calendar.
+
+- calendar.google.com → **Settings** (gear icon) → under **Settings for other
+  calendars**, click **Earnings calendar** → **Event notifications** → **Add
+  notification** (for example, 1 day before).
+
+Then it's done. The calendar appears on your phone too, once the subscription
+syncs.
+
+### Known limits (accepted for v1)
+
+- Google refreshes subscriptions roughly once a day, so a moved date can take
+  up to a day longer to show.
+- Subscribed events are read-only.
+- This is not a last-minute alert system.
+- GitHub pauses scheduled workflows in a public repo after 60 days with no
+  activity. The daily commits normally count as activity, but if the Actions
+  tab ever shows the workflow disabled, click **Enable workflow**.
+- If a source fails, the Actions run fails and GitHub emails you. The
+  calendar keeps its last good version until a run succeeds.
 
 ## Running locally
 
