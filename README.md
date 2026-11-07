@@ -151,7 +151,7 @@ Exit codes: `0` success, `1` a source was unavailable (nothing written),
 | --- | --- |
 | `watchlist.txt` | One ticker per line. Edit by hand. |
 | `companies.toml` | Per ticker: fiscal-year-end month and investor-relations URL. Add an entry when you add a ticker. |
-| `config.toml` | Horizon (90 days), event duration (60 min), default start times, time zone. |
+| `config.toml` | Horizon (45 days), event duration (60 min), default start times, time zone. |
 | `earnings.ics` | The output and the only state. Don't edit it by hand. |
 
 ## How it decides

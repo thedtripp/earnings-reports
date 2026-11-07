@@ -4,8 +4,9 @@ watchlist = "watchlist.txt"
 companies = "companies.toml"
 output = "earnings.ics"
 
-# Include earnings dates from today up to this many days out.
-horizon_days = 90
+# Include earnings dates from today up to this many days out. Past ~45 days only
+# one source (Finnhub) has dates, with no cross-check and no confirmed status.
+horizon_days = 45
 
 # Events are timed. No source gives an end time, so every event lasts this long.
 duration_minutes = 60
