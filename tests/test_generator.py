@@ -299,11 +299,11 @@ class BehaviourTests(unittest.TestCase):
 
     def test_single_source_and_unknown_timing(self):
         w = self.ws(["AAPL"])
-        web = FakeWeb(finnhub={"AAPL": [fh("AAPL", "2027-01-27", hour="", q=1, y=2027)]})
+        web = FakeWeb(finnhub={"AAPL": [fh("AAPL", "2026-12-01", hour="", q=1, y=2027)]})
         self.assertEqual(w.run(web), 0)
         ev, = w.events().values()
         self.assertEqual(summary(ev), "AAPL earnings, Q1 FY27, time not reported")
-        self.assertEqual(ev.props["DTSTART"], "20270127T133000Z")  # 8:30 AM EST
+        self.assertEqual(ev.props["DTSTART"], "20261201T133000Z")  # 8:30 AM EST
         self.assertIn("Finnhub only (Nasdaq and Alpha Vantage have no date", description(ev))
         self.assertIn("Start time approximate", description(ev))
 
