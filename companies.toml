@@ -85,3 +85,122 @@ ir_url = "https://ir.tesla.com"
 [RDDT]
 fiscal_year_end_month = 12
 ir_url = "https://investor.redditinc.com"
+
+[INTC]
+fiscal_year_end_month = 12
+ir_url = "https://www.intc.com"
+
+[AMAT]
+fiscal_year_end_month = 10
+ir_url = "https://ir.appliedmaterials.com"
+
+[LRCX]
+fiscal_year_end_month = 6
+ir_url = "https://investor.lamresearch.com"
+
+[KLAC]
+fiscal_year_end_month = 6
+ir_url = "https://ir.kla.com"
+
+[ANET]
+fiscal_year_end_month = 12
+ir_url = "https://investors.arista.com"
+
+[CRWD]
+fiscal_year_end_month = 1
+ir_url = "https://ir.crowdstrike.com"
+
+[DELL]
+fiscal_year_end_month = 1
+ir_url = "https://investors.delltechnologies.com"
+
+[APH]
+fiscal_year_end_month = 12
+ir_url = "https://investors.amphenol.com"
+
+[APP]
+fiscal_year_end_month = 12
+ir_url = "https://investors.applovin.com"
+
+[NFLX]
+fiscal_year_end_month = 12
+ir_url = "https://ir.netflix.net"
+
+[DIS]
+fiscal_year_end_month = 9
+ir_url = "https://thewaltdisneycompany.com/investor-relations/"
+
+[RBLX]
+fiscal_year_end_month = 12
+ir_url = "https://ir.roblox.com"
+
+[TTWO]
+fiscal_year_end_month = 3
+ir_url = "https://ir.take2games.com"
+
+[COST]
+fiscal_year_end_month = 8
+ir_url = "https://investor.costco.com"
+
+[WMT]
+fiscal_year_end_month = 1
+ir_url = "https://stock.walmart.com"
+
+[HD]
+fiscal_year_end_month = 1
+ir_url = "https://ir.homedepot.com"
+
+[NKE]
+fiscal_year_end_month = 5
+ir_url = "https://investors.nike.com"
+
+[ABNB]
+fiscal_year_end_month = 12
+ir_url = "https://investors.airbnb.com"
+
+[DASH]
+fiscal_year_end_month = 12
+ir_url = "https://ir.doordash.com"
+
+[CVNA]
+fiscal_year_end_month = 12
+ir_url = "https://investors.carvana.com"
+
+[JPM]
+fiscal_year_end_month = 12
+ir_url = "https://www.jpmorganchase.com/ir"
+
+[BAC]
+fiscal_year_end_month = 12
+ir_url = "https://investor.bankofamerica.com"
+
+[GS]
+fiscal_year_end_month = 12
+ir_url = "https://www.goldmansachs.com/investor-relations/"
+
+[V]
+fiscal_year_end_month = 9
+ir_url = "https://investor.visa.com"
+
+[LLY]
+fiscal_year_end_month = 12
+ir_url = "https://investor.lilly.com"
+
+[UNH]
+fiscal_year_end_month = 12
+ir_url = "https://www.unitedhealthgroup.com/investors.html"
+
+[ISRG]
+fiscal_year_end_month = 12
+ir_url = "https://investor.intuitive.com"
+
+[GE]
+fiscal_year_end_month = 12
+ir_url = "https://www.ge.com/investor-relations"
+
+[GEV]
+fiscal_year_end_month = 12
+ir_url = "https://www.gevernova.com/investors"
+
+[SPCX]
+fiscal_year_end_month = 12
