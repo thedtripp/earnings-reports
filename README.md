@@ -33,6 +33,13 @@ that Google Calendar (or any calendar app) can subscribe to.
   visible field changes, so calendars update events instead of duplicating them.
   An unchanged run gives a byte-identical file.
 
+## Earnings call listener (planning)
+
+A separate, not-yet-built pipeline for transcribing and analyzing calls. A
+proof of concept, `call_schedule_poc.py`, looks up call times and webcast links
+for reports in the next 7 days. It reads `earnings.ics` and never changes it.
+See [`docs/earnings-call-plan.md`](docs/earnings-call-plan.md).
+
 ## Failure behavior
 
 If any source fails (network error, bad or unrecognized response, rate limit,
@@ -58,6 +65,7 @@ export FINNHUB_API_KEY=... ALPHAVANTAGE_API_KEY=...
 python3 generate.py                          # writes earnings.ics
 python3 generate.py --today 2026-11-06 -v    # fixed date, verbose
 python3 -m unittest discover -s tests        # offline tests
+python3 call_schedule_poc.py --days 7        # call-time lookup (needs FINNHUB_API_KEY)
 ```
 
 Exit codes: `0` success, `1` a source was unavailable, `2` configuration error.
