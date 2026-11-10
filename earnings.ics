@@ -8,24 +8,6 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:ttwo-fy2027-q2@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:0
-SUMMARY:TTWO earnings\, Q2 FY27\, after close
-DTSTART:20261109T213000Z
-DTEND:20261109T223000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
- ; Alpha Vantage: after close.\nStart time approximate: the sources give on
- ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
-  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
- daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
- nInvestor relations: https://ir.take2games.com
-URL:https://ir.take2games.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:amat-fy2026-q4@earnings-calendar
 DTSTAMP:20261106T000000Z
 SEQUENCE:0
@@ -207,82 +189,23 @@ URL:https://investor.salesforce.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:orcl-fy2027-q2-20261208@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
-SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
-DTSTART:20261208T133000Z
-DTEND:20261208T143000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Tue Dec 8\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage r
- eport Wed Dec 9\, 2026 instead (listed as a separate DISPUTED event).\nEar
- nings release. The conference call is normally the same day\, shortly afte
- r the release\; the exact call time is in the company's own announcement.\
- nRelease timing: Finnhub: time not reported.\nStart time approximate: no s
- ource says whether the release is before open or after close\, so 8:30 AM 
- EST is a placeholder.\nStatus: not reported (Finnhub does not say whether 
- the date is confirmed or estimated).\nInvestor relations: https://investor
- .oracle.com
-URL:https://investor.oracle.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:orcl-fy2027-q2-20261209@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
+DTSTAMP:20261110T000000Z
+SEQUENCE:2
 SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
 DTSTART:20261209T133000Z
 DTEND:20261209T143000Z
 DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
  is date (Wed Dec 9\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub r
- eports Tue Dec 8\, 2026 instead (listed as a separate DISPUTED event).\nEa
- rnings release. The conference call is normally the same day\, shortly aft
- er the release\; the exact call time is in the company's own announcement.
- \nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not repo
- rted.\nStart time approximate: no source says whether the release is befor
- e open or after close\, so 8:30 AM EST is a placeholder.\nStatus: estimate
- d (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nInv
- estor relations: https://investor.oracle.com
-URL:https://investor.oracle.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:avgo-fy2026-q4-20261209@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
-SUMMARY:DISPUTED: AVGO earnings\, Q4 FY26\, after close
-DTSTART:20261209T213000Z
-DTEND:20261209T223000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Wed Dec 9\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage r
- eport Thu Dec 10\, 2026 instead (listed as a separate DISPUTED event).\nEa
- rnings release. The conference call is normally the same day\, shortly aft
- er the release\; the exact call time is in the company's own announcement.
- \nRelease timing: Finnhub: after close.\nStart time approximate: the sourc
- e gives only "after close"\, with no clock time\, so 4:30 PM EST is a defa
- ult.\nStatus: not reported (Finnhub does not say whether the date is confi
- rmed or estimated).\nInvestor relations: https://investors.broadcom.com
-URL:https://investors.broadcom.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:avgo-fy2026-q4-20261210@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
-SUMMARY:DISPUTED: AVGO earnings\, Q4 FY26\, time not reported
-DTSTART:20261210T133000Z
-DTEND:20261210T143000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Thu Dec 10\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub 
- reports Wed Dec 9\, 2026 instead (listed as a separate DISPUTED event).\nE
+ eports Mon Dec 14\, 2026 instead (listed as a separate DISPUTED event).\nE
  arnings release. The conference call is normally the same day\, shortly af
  ter the release\; the exact call time is in the company's own announcement
  .\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not rep
  orted.\nStart time approximate: no source says whether the release is befo
  re open or after close\, so 8:30 AM EST is a placeholder.\nStatus: estimat
  ed (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nIn
- vestor relations: https://investors.broadcom.com
-URL:https://investors.broadcom.com
+ vestor relations: https://investor.oracle.com
+URL:https://investor.oracle.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
@@ -302,6 +225,44 @@ DESCRIPTION:Earnings release. The conference call is normally the same day\
  hether the date is confirmed.\nInvestor relations: https://investor.costco
  .com
 URL:https://investor.costco.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:avgo-fy2026-q4@earnings-calendar
+DTSTAMP:20261110T000000Z
+SEQUENCE:0
+SUMMARY:AVGO earnings\, Q4 FY26\, after close
+DTSTART:20261210T213000Z
+DTEND:20261210T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: time not rep
+ orted\; Alpha Vantage: time not reported.\nStart time approximate: the sou
+ rce gives only "after close"\, with no clock time\, so 4:30 PM EST is a de
+ fault.\nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: es
+ timated (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is
+  confirmed.\nInvestor relations: https://investors.broadcom.com
+URL:https://investors.broadcom.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:orcl-fy2027-q2-20261214@earnings-calendar
+DTSTAMP:20261110T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
+DTSTART:20261214T133000Z
+DTEND:20261214T143000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Mon Dec 14\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage 
+ report Wed Dec 9\, 2026 instead (listed as a separate DISPUTED event).\nEa
+ rnings release. The conference call is normally the same day\, shortly aft
+ er the release\; the exact call time is in the company's own announcement.
+ \nRelease timing: Finnhub: time not reported.\nStart time approximate: no 
+ source says whether the release is before open or after close\, so 8:30 AM
+  EST is a placeholder.\nStatus: not reported (Finnhub does not say whether
+  the date is confirmed or estimated).\nInvestor relations: https://investo
+ r.oracle.com
+URL:https://investor.oracle.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
