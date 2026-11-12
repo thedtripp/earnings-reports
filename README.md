@@ -85,6 +85,11 @@ Exit codes: `0` success, `1` a source was unavailable, `2` configuration error.
 
 ## Limits
 
+- Nasdaq sometimes blocks GitHub's servers (HTTP 403). The generator retries
+  with growing waits; if Nasdaq stays blocked it publishes without it: events
+  already in `earnings.ics` are kept exactly as they were (so "confirmed" is
+  never lost), new events from Finnhub and Alpha Vantage are added, and the
+  log shows a warning. If Finnhub or Alpha Vantage fail, nothing is published.
 - Calendar apps refresh subscriptions about once a day. Subscribed events are
   read-only, and this is not a last-minute alert system.
 - GitHub pauses scheduled workflows in a public repo after 60 days without

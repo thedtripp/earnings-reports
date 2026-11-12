@@ -67,6 +67,11 @@ class FakeWeb:
             return 200, json.dumps({"earningsCalendar": self.finnhub.get(sym, [])}).encode()
         if self.fail == "Nasdaq":
             return 503, b"Service Unavailable"
+        if self.fail == "Nasdaq403":
+            return 403, b"Forbidden"
+        if self.fail == "Nasdaq403-once" and not getattr(self, "_blocked", False):
+            self._blocked = True
+            return 403, b"Forbidden"
         m = re.search(r"/analyst/([A-Z.]+)/earnings-date", url)
         if m:
             text = self.nasdaq.get(m.group(1), (NO_DATE, None))[0]
@@ -235,7 +240,7 @@ class AcceptanceTests(unittest.TestCase):
 
     # 5. With a source failing, the published file is untouched and exit is nonzero.
     def test_5_failed_source_publishes_nothing(self):
-        for failing in ("Finnhub", "Nasdaq", "Alpha Vantage"):
+        for failing in ("Finnhub", "Alpha Vantage"):
             with self.subTest(failing=failing):
                 w = self.ws(["NVDA"])
                 self.assertEqual(w.run(nvda_web()), 0)
@@ -244,6 +249,40 @@ class AcceptanceTests(unittest.TestCase):
                 self.assertNotEqual(code, 0)
                 self.assertEqual(w.ics.read_bytes(), before)
                 self.assertFalse((w.dir / "earnings.ics.tmp").exists())
+
+    def test_5a_nasdaq_403_is_retried(self):
+        w = self.ws(["NVDA"])
+        self.assertEqual(w.run(nvda_web(fail="Nasdaq403-once")), 0)
+        self.assertIn("confirmed (Nasdaq)", description(next(iter(w.events().values()))))
+
+    def test_5d_nasdaq_blocked_keeps_published_events_and_adds_new_ones(self):
+        w = self.ws(["NVDA"])
+        self.assertEqual(w.run(nvda_web()), 0)
+        (uid, first), = w.events().items()
+        # Blocked run, same data from Finnhub and Alpha Vantage: nothing changes.
+        before = w.ics.read_bytes()
+        self.assertEqual(w.run(nvda_web(fail="Nasdaq403"), today="2026-11-07"), 0)
+        self.assertEqual(w.ics.read_bytes(), before)
+        # Finnhub now disagrees on the date: the published event is not downgraded.
+        moved = nvda_web(fail="Nasdaq403")
+        moved.finnhub = {"NVDA": [fh("NVDA", "2026-11-26")]}
+        self.assertEqual(w.run(moved, today="2026-11-07"), 0)
+        kept = w.events()[uid]  # the other sources now disagree, so DISPUTED events are added
+        self.assertEqual(kept.props, first.props)
+        self.assertIn("confirmed (Nasdaq)", description(kept))
+
+    def test_5e_nasdaq_blocked_still_publishes_a_new_ticker(self):
+        w = self.ws(["NVDA"])
+        self.assertEqual(w.run(nvda_web()), 0)
+        w.dir.joinpath("watchlist.txt").write_text("NVDA\nAVGO\n")
+        web = FakeWeb(finnhub={"NVDA": [fh("NVDA", "2026-11-25")],
+                               "AVGO": [fh("AVGO", "2026-12-09", q=4, y=2026)]},
+                      alpha=[av("NVDA", "2026-11-25")], fail="Nasdaq403")
+        self.assertEqual(w.run(web, today="2026-11-07"), 0)
+        events = w.events().values()
+        self.assertEqual(len(events), 2)
+        avgo = next(e for e in events if summary(e).startswith("AVGO"))
+        self.assertNotIn("Nasdaq", description(avgo))
 
     def test_5b_missing_api_key_is_a_failure_not_an_empty_source(self):
         w = self.ws(["NVDA"])

@@ -11,6 +11,7 @@ import csv
 import io
 import json
 import logging
+import random
 import re
 import time
 import urllib.error
@@ -65,26 +66,35 @@ def urllib_get(url: str, headers: dict, timeout: float = 30.0) -> tuple[int, byt
         return e.code, e.read() or b""
 
 
+class SourceBlocked(SourceUnavailable):
+    """The source kept refusing or failing after every retry (block, throttle, outage).
+
+    Unlike a bad response shape, this says nothing about the data itself, so a
+    caller may choose to carry on without the source.
+    """
+
+
 def get_json(source: str, http_get: HttpGet, url: str, headers: dict, **kw):
     """GET a JSON document, retrying transient failures, else SourceUnavailable."""
     return get(source, http_get, url, headers, parse=json.loads, **kw)
 
 
 def get(source: str, http_get: HttpGet, url: str, headers: dict, parse,
-        retries: int = 3, backoff: float = 2.0,
+        retries: int = 3, backoff: float = 2.0, retry_statuses: tuple = (429,),
         sleep: Callable[[float], None] | None = None):
     """GET and parse a document, retrying transient failures, else SourceUnavailable."""
     last = "no attempt made"
     for attempt in range(retries):
         if attempt:
-            (sleep or time.sleep)(backoff * 2 ** (attempt - 1))
+            delay = backoff * 2 ** (attempt - 1)
+            (sleep or time.sleep)(delay + random.uniform(0, delay / 2))
         try:
             status, body = http_get(url, headers)
         except OSError as e:
             last = f"network error: {e}"
             continue
-        if status == 429:
-            last = "rate limited (HTTP 429)"
+        if status in retry_statuses:
+            last = f"refused (HTTP {status})"
             continue
         if status >= 500:
             last = f"server error (HTTP {status})"
@@ -97,7 +107,7 @@ def get(source: str, http_get: HttpGet, url: str, headers: dict, parse,
         except ValueError as e:
             last = f"bad response: {e}"
             continue
-    raise SourceUnavailable(source, f"{last} for {redact(url)}")
+    raise SourceBlocked(source, f"{last} for {redact(url)}")
 
 
 def redact(url: str) -> str:
@@ -223,7 +233,10 @@ class Nasdaq:
         self._calendar_cache: dict[date, list] = {}
 
     def _get(self, url: str):
-        data = get_json(self.name, self.http_get, url, NASDAQ_HEADERS, **self.kw)
+        # Nasdaq blocks some datacenter IPs with a 403 that is often gone minutes
+        # later, so unlike other sources a 403 is retried, with longer waits.
+        opts = {"retries": 4, "backoff": 5.0, "retry_statuses": (403, 429), **self.kw}
+        data = get_json(self.name, self.http_get, url, NASDAQ_HEADERS, **opts)
         if not isinstance(data, dict) or "data" not in data:
             raise SourceUnavailable(self.name, f"unexpected response shape from {url}")
         return data

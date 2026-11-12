@@ -245,5 +245,20 @@ def apply_previous(events: list[ics.Event], previous: dict[str, ics.Event], stam
     return events
 
 
+def keep_previous(events, previous, today):
+    """Merge a run that lacked a source into the last published file.
+
+    An event already published is kept exactly as it was, so a missing source
+    can't downgrade it (e.g. lose "confirmed"). Events only this run found are
+    added; upcoming events this run didn't find are kept rather than dropped.
+    """
+    merged = [previous.get(ev.uid, ev) for ev in events]
+    seen = {ev.uid for ev in events}
+    for uid, prev in previous.items():
+        if uid not in seen and prev.props["DTSTART"][:8] >= f"{today:%Y%m%d}":
+            merged.append(prev)
+    return merged
+
+
 def sort_key(ev: ics.Event):
     return (ev.props["DTSTART"], ev.uid)
