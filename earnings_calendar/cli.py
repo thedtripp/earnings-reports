@@ -12,13 +12,18 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from . import core, ics
-from .sources import AlphaVantage, Finnhub, Nasdaq, SourceUnavailable, urllib_get
+from .sources import AlphaVantage, Finnhub, Nasdaq, SourceBlocked, SourceUnavailable, urllib_get
 
 log = logging.getLogger("earnings_calendar")
 
 EXIT_OK = 0
 EXIT_SOURCE_UNAVAILABLE = 1
 EXIT_CONFIG = 2
+
+# Sources the calendar can be published without. Nasdaq alone: it is unofficial
+# and blocks some datacenter IPs, and the two keyed sources failing means a
+# broken key or quota that someone should fix.
+OPTIONAL_SOURCES = {"Nasdaq"}
 
 
 def read_watchlist(path: Path) -> list[str]:
@@ -81,13 +86,20 @@ def main(argv=None, http_get=urllib_get, env=None, sources=None) -> int:
                    AlphaVantage(env.get("ALPHAVANTAGE_API_KEY"), fye, http_get=http_get)]
 
     reports = {t: [] for t in tickers}
-    failed = []
+    failed, skipped = [], []
     for src in sources:
         try:
             for t in tickers:
                 got = [r for r in src.fetch(t, today, horizon_end) if today <= r.date <= horizon_end]
                 log.debug("%s %s: %s", src.name, t, got)
                 reports[t] += got
+        except SourceBlocked as e:
+            if src.name in OPTIONAL_SOURCES:
+                log.warning("source blocked, carrying on without it: %s", e)
+                skipped.append(src.name)
+            else:
+                log.error("source unavailable: %s", e)
+                failed.append(src.name)
         except SourceUnavailable as e:
             log.error("source unavailable: %s", e)
             failed.append(src.name)
@@ -97,8 +109,12 @@ def main(argv=None, http_get=urllib_get, env=None, sources=None) -> int:
                   " and ".join(failed), output)
         return EXIT_SOURCE_UNAVAILABLE
 
+    if skipped:
+        # Drop whatever a skipped source returned before it failed: a partial
+        # set would make some tickers look different from the rest.
+        reports = {t: [r for r in rs if r.source not in skipped] for t, rs in reports.items()}
     settings = core.Settings(
-        source_names=tuple(s.name for s in sources), tz=tz,
+        source_names=tuple(s.name for s in sources if s.name not in skipped), tz=tz,
         duration_minutes=int(cfg.get("duration_minutes", 60)),
         default_start=cfg.get("default_start"),
         uid_domain=cfg.get("calendar", {}).get("uid_domain", "earnings-calendar"),
@@ -108,6 +124,10 @@ def main(argv=None, http_get=urllib_get, env=None, sources=None) -> int:
     for t in tickers:
         events += core.build_events(t, reports[t], settings)
     previous = ics.parse(previous_path.read_bytes()) if previous_path.exists() else {}
+    if skipped:
+        events = core.keep_previous(events, previous, today)
+        log.warning("%s unavailable: published new dates only; events already in %s are "
+                    "kept as they were", " and ".join(skipped), previous_path)
     core.apply_previous(events, previous, stamp=f"{today:%Y%m%d}T000000Z")
     events.sort(key=core.sort_key)
     data = ics.render(events, cfg.get("calendar", {}).get("name", "Earnings calendar"), tz)
