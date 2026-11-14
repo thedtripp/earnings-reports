@@ -8,42 +8,6 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:amat-fy2026-q4@earnings-calendar
-DTSTAMP:20261112T000000Z
-SEQUENCE:1
-SUMMARY:AMAT earnings\, Q4 FY26\, after close
-DTSTART:20261112T213000Z
-DTEND:20261112T223000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Alpha Vantage: after
-  close.\nStart time approximate: the sources give only "after close"\, wit
- h no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://ir.appliedmaterials.com
-URL:https://ir.appliedmaterials.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:csco-fy2027-q1@earnings-calendar
-DTSTAMP:20261112T000000Z
-SEQUENCE:3
-SUMMARY:CSCO earnings\, Q1 FY27\, after close
-DTSTART:20261112T213000Z
-DTEND:20261112T223000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Alpha Vantage: after
-  close.\nStart time approximate: the sources give only "after close"\, wit
- h no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://investor.cisco.com
-URL:https://investor.cisco.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:dis-fy2026-q4@earnings-calendar
 DTSTAMP:20261106T000000Z
 SEQUENCE:0
@@ -117,19 +81,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wmt-fy2027-q3@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:0
+DTSTAMP:20261114T000000Z
+SEQUENCE:1
 SUMMARY:WMT earnings\, Q3 FY27\, before open
 DTSTART:20261119T133000Z
 DTEND:20261119T143000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: before
-  open\; Alpha Vantage: before open.\nStart time approximate: the sources g
- ive only "before open"\, with no clock time\, so 8:30 AM EST is a default.
- \nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirme
- d (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is confi
- rmed.\nInvestor relations: https://stock.walmart.com
+ announcement.\nRelease timing: Finnhub: before open\; Nasdaq: before open\
+ ; Alpha Vantage: before open.\nStart time approximate: the sources give on
+ ly "before open"\, with no clock time\, so 8:30 AM EST is a default.\nDate
+  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
+ daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
+ nInvestor relations: https://stock.walmart.com
 URL:https://stock.walmart.com
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -171,19 +135,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:crm-fy2027-q3@earnings-calendar
-DTSTAMP:20261112T000000Z
-SEQUENCE:2
+DTSTAMP:20261114T000000Z
+SEQUENCE:3
 SUMMARY:CRM earnings\, Q3 FY27\, after close
 DTSTART:20261202T213000Z
 DTEND:20261202T223000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
  announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
- ; Alpha Vantage: time not reported.\nStart time approximate: the sources g
- ive only "after close"\, with no clock time\, so 4:30 PM EST is a default.
- \nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirme
- d (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is confi
- rmed.\nInvestor relations: https://investor.salesforce.com
+ ; Alpha Vantage: after close.\nStart time approximate: the sources give on
+ ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
+  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
+ daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
+ nInvestor relations: https://investor.salesforce.com
 URL:https://investor.salesforce.com
 TRANSP:TRANSPARENT
 END:VEVENT
