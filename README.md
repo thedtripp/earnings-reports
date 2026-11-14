@@ -10,7 +10,7 @@ that Google Calendar (or any calendar app) can subscribe to.
   the generator, and commits `earnings.ics` if it changed.
 - **Subscribe** to the raw file URL, then set one reminder for the whole
   calendar in your calendar app:
-  `https://raw.githubusercontent.com/<owner>/<repo>/main/earnings.ics`
+  `https://raw.githubusercontent.com/thedtripp/earnings-reports/main/earnings.ics`
 
 ## Events
 
