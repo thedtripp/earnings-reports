@@ -24,6 +24,59 @@ def render(*events, cover="cover.png"):
     return site.render(site.rows_from_ics(data, today=NOW), NOW, cover)
 
 
+def render_with_companies(tmp, watchlist, companies_toml, *events):
+    (tmp / "w.txt").write_text(watchlist)
+    (tmp / "c.toml").write_text(companies_toml)
+    data = ics.render(list(events), "Test", "America/New_York")
+    rows = site.rows_from_ics(data, today=NOW)
+    comps = site.load_companies(tmp / "w.txt", tmp / "c.toml", rows)
+    return comps, site.render(rows, NOW, None, comps)
+
+
+class CompaniesTests(unittest.TestCase):
+    def setUp(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(__import__("shutil").rmtree, self.tmp)
+
+    def test_lists_every_watchlist_company_alphabetically_with_next_dates(self):
+        comps, page = render_with_companies(
+            self.tmp, "ZZZ\n# comment\nAAA\nBBB  # trailing\n",
+            '[AAA]\nname = "Alpha Co"\nir_url = "https://ir.alpha.example/"\n[ZZZ]\nname = "Zed Corp"\n',
+            event("a@x", "AAA earnings, Q3 FY27, before open", "20261117T133000Z"))
+        self.assertEqual([c.ticker for c in comps], ["AAA", "BBB", "ZZZ"])
+        self.assertIn("Companies covered (3)", page)
+        self.assertIn("Next: Nov 17", page)
+        self.assertEqual(page.count("No date yet"), 2)
+        self.assertIn('href="https://ir.alpha.example/"', page)
+        self.assertLess(page.index(">AAA<"), page.index(">ZZZ<"))
+
+    def test_disputed_company_shows_both_dates(self):
+        comps, page = render_with_companies(
+            self.tmp, "AAA\n", '[AAA]\nname = "Alpha"\n',
+            event("a1@x", "DISPUTED: AAA earnings, Q3 FY27, after close", "20261209T213000Z"),
+            event("a2@x", "DISPUTED: AAA earnings, Q3 FY27, after close", "20261214T213000Z"))
+        self.assertEqual(comps[0].dates, ["Dec 9", "Dec 14"])
+        self.assertIn("Next: Dec 9 or Dec 14", page)
+
+    def test_company_without_name_or_link_still_listed_and_escaped(self):
+        _, page = render_with_companies(
+            self.tmp, "AAA\nBBB\n",
+            '[BBB]\nname = "<b>Bad</b> & Co"\nir_url = "javascript:alert(1)"\n')
+        self.assertIn(">AAA<", page)
+        self.assertNotIn("<b>Bad</b>", page)
+        self.assertNotIn("javascript:", page)
+
+    def test_section_absent_when_no_companies_given(self):
+        self.assertNotIn("Companies covered", render())
+
+    def test_real_watchlist_is_fully_named(self):
+        root = Path(__file__).resolve().parent.parent
+        comps = site.load_companies(root / "watchlist.txt", root / "companies.toml", [])
+        self.assertEqual(len(comps), 50)
+        self.assertEqual([c.ticker for c in comps if not c.name], [])
+
+
 class SiteTests(unittest.TestCase):
     def test_sorted_and_past_events_dropped(self):
         page = render(

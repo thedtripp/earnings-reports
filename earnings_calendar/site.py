@@ -8,8 +8,10 @@ from __future__ import annotations
 
 import html
 import re
+import tomllib
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from . import ics
@@ -32,6 +34,28 @@ class Row:
     status: str       # confirmed / estimated / not reported
     disputed: bool
     url: str
+
+
+@dataclass
+class Company:
+    ticker: str
+    name: str
+    ir_url: str
+    dates: list[str]  # upcoming dates as written on the page, e.g. "Nov 17"
+
+
+def load_companies(watchlist: Path, companies: Path, rows: list["Row"]) -> list[Company]:
+    """The watchlist, in alphabetical order, with each company's next date(s)."""
+    tickers = sorted({l.split("#", 1)[0].strip().upper()
+                      for l in watchlist.read_text(encoding="utf-8").splitlines()} - {""})
+    info = tomllib.loads(companies.read_text(encoding="utf-8")) if companies.exists() else {}
+    out = []
+    for t in tickers:
+        mine = sorted({(r.sort_key, r.day) for r in rows if r.ticker == t})
+        # "Tue Nov 17, 2026" -> "Nov 17"
+        dates = [d[1].split(" ", 1)[1].rsplit(",", 1)[0] for d in mine]
+        out.append(Company(t, info.get(t, {}).get("name", ""), info.get(t, {}).get("ir_url", ""), dates))
+    return out
 
 
 def unescape(text: str) -> str:
@@ -75,7 +99,29 @@ def rows_from_ics(data: bytes, tz: str = "America/New_York",
 _STATUS_LABEL = {"confirmed": "Confirmed", "estimated": "Estimated", "not reported": "Unconfirmed"}
 
 
-def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png") -> str:
+def _companies_html(companies: list[Company]) -> str:
+    e = html.escape
+    cards = []
+    for c in companies:
+        label = e(c.name) if c.name else ""
+        name = (f'<a href="{e(c.ir_url, quote=True)}" rel="noopener">{label or e(c.ticker)}</a>'
+                if c.ir_url.startswith("https://") else label)
+        if not c.dates:
+            when = '<span class="none">No date yet</span>'
+        elif len(c.dates) == 1:
+            when = f"Next: {e(c.dates[0])}"
+        else:
+            when = f'Next: {e(" or ".join(c.dates))} <span class="muted">(disputed)</span>'
+        cards.append(f'<li><span class="tk">{e(c.ticker)}</span>'
+                     f'<span class="nm">{name}</span><span class="when">{when}</span></li>')
+    return (f'<h2 class="cc">Companies covered ({len(companies)})</h2>'
+            '<p class="muted note">Every company on the watchlist. Dates appear here once a source '
+            'lists one, usually within about six weeks of the report.</p>'
+            f'<ul class="companies" style="--rows:{-(-len(companies) // 2)}">{"".join(cards)}</ul>')
+
+
+def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png",
+           companies: list[Company] | None = None) -> str:
     e = html.escape
     items = []
     for r in rows:
@@ -97,10 +143,10 @@ def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png")
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Earnings calendar</title>
-<meta name="description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
+<meta name="description" content="Earnings dates for large-cap stocks, cross-checked across three sources and published as a calendar you can subscribe to.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Earnings calendar">
-<meta property="og:description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
+<meta property="og:description" content="Earnings dates for large-cap stocks, cross-checked across three sources and published as a calendar you can subscribe to.">
 <meta property="og:url" content="https://www.ddtripp.com/earnings-reports/">
 <meta property="og:image" content="https://www.ddtripp.com/earnings-reports/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,19 +167,24 @@ h2{{font-size:1.1rem;margin:0 0 10px}}
 .side{{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center;font-size:.85rem}}.side a{{color:var(--accent)}}
 .badge{{padding:2px 9px;border-radius:999px;font-size:.75rem;font-weight:600;border:1px solid currentColor}}
 .confirmed{{color:var(--ok)}}.estimated{{color:var(--warn)}}.not-reported{{color:var(--muted)}}.disputed{{color:var(--bad)}}
-@media (max-width:560px){{.events li{{grid-template-columns:1fr}}.side{{justify-content:flex-start}}}}
+h2+.note,.note{{margin:0 0 10px;font-size:.88rem}}.companies{{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(var(--rows),auto);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}}
+.companies li{{display:grid;grid-template-columns:58px 1fr;grid-template-areas:"tk nm" "tk when";gap:0 10px;padding:10px 16px;background:var(--card);align-items:center}}
+.tk{{grid-area:tk;font-weight:700;letter-spacing:.02em}}.nm{{grid-area:nm;font-size:.92rem}}.nm a{{color:var(--fg);text-decoration:none}}.nm a:hover{{color:var(--accent);text-decoration:underline}}
+.when{{grid-area:when;color:var(--muted);font-size:.82rem}}.none{{opacity:.8}}h2.cc{{margin-top:32px}}
+@media (max-width:560px){{.events li{{grid-template-columns:1fr}}.side{{justify-content:flex-start}}.companies{{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none}}}}
 .empty{{color:var(--muted)}}footer{{margin-top:28px;color:var(--muted);font-size:.85rem}}footer a{{color:var(--accent)}}
 </style></head><body>
 <a class="home" href="{e(HOME_URL, quote=True)}" aria-label="Back to ddtripp.com">&larr; DDTRIPP</a>
 {hero}<main>
 <h1>Earnings calendar</h1>
-<p class="lede">Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to. Updated daily.</p>
+<p class="lede">Earnings dates for large-cap stocks, cross-checked across three sources and published as a calendar you can subscribe to. Updated daily.</p>
 <div class="actions"><a class="btn primary" href="{e(gcal, quote=True)}">Add to Google Calendar</a>
 <button class="btn" id="copy" type="button">Copy calendar URL</button>
 <a class="btn" href="{e(REPO_URL, quote=True)}">View source</a></div>
 <code class="url" id="url">{e(SUBSCRIBE_URL)}</code>
 <h2>Upcoming</h2>
 {body}
+{_companies_html(companies) if companies else ""}
 <footer>Built {e(stamp)}. Dates come from Finnhub, Nasdaq and Alpha Vantage; only Nasdaq says whether a date is confirmed. Start times are approximate defaults. <a href="{e(REPO_URL, quote=True)}">How it works</a>. <a href="{e(HOME_URL, quote=True)}">Back to ddtripp.com</a>.</footer>
 </main>
 <script>document.getElementById("copy").addEventListener("click",function(){{var b=this,t=document.getElementById("url").textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){{b.textContent="Copied"}},function(){{b.textContent="Select the URL below"}})}});</script>

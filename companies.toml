@@ -1,5 +1,6 @@
 # Per-company facts the sources don't provide.
 #
+# name: short display name, shown on the demo page.
 # fiscal_year_end_month: month (1-12) the company's fiscal year ends. Used to
 #   turn Nasdaq's "fiscal quarter ending Oct/2026" into "Q3 FY27". Finnhub
 #   reports the fiscal quarter directly. Tickers missing here are assumed to
@@ -7,200 +8,250 @@
 # ir_url: investor-relations site, shown in event notes.
 
 [AAPL]
+name = "Apple"
 fiscal_year_end_month = 9
 ir_url = "https://investor.apple.com"
 
 [NVDA]
+name = "NVIDIA"
 fiscal_year_end_month = 1
 ir_url = "https://investor.nvidia.com"
 
 [MSFT]
+name = "Microsoft"
 fiscal_year_end_month = 6
 ir_url = "https://www.microsoft.com/en-us/investor"
 
 [AMZN]
+name = "Amazon"
 fiscal_year_end_month = 12
 ir_url = "https://ir.aboutamazon.com"
 
 [GOOGL]
+name = "Alphabet"
 fiscal_year_end_month = 12
 ir_url = "https://abc.xyz/investor/"
 
 [META]
+name = "Meta Platforms"
 fiscal_year_end_month = 12
 ir_url = "https://investor.atmeta.com"
 
 [AVGO]
+name = "Broadcom"
 fiscal_year_end_month = 10
 ir_url = "https://investors.broadcom.com"
 
 [TSM]
+name = "Taiwan Semiconductor Manufacturing"
 fiscal_year_end_month = 12
 ir_url = "https://investor.tsmc.com"
 
 [MU]
+name = "Micron Technology"
 fiscal_year_end_month = 8
 ir_url = "https://investors.micron.com"
 
 [AMD]
+name = "Advanced Micro Devices"
 fiscal_year_end_month = 12
 ir_url = "https://ir.amd.com"
 
 [ASML]
+name = "ASML Holding"
 fiscal_year_end_month = 12
 ir_url = "https://www.asml.com/en/investors"
 
 [ORCL]
+name = "Oracle"
 fiscal_year_end_month = 5
 ir_url = "https://investor.oracle.com"
 
 [PLTR]
+name = "Palantir Technologies"
 fiscal_year_end_month = 12
 ir_url = "https://investors.palantir.com"
 
 [CSCO]
+name = "Cisco Systems"
 fiscal_year_end_month = 7
 ir_url = "https://investor.cisco.com"
 
 [CRM]
+name = "Salesforce"
 fiscal_year_end_month = 1
 ir_url = "https://investor.salesforce.com"
 
 [TXN]
+name = "Texas Instruments"
 fiscal_year_end_month = 12
 ir_url = "https://investor.ti.com"
 
 [IBM]
+name = "IBM"
 fiscal_year_end_month = 12
 ir_url = "https://www.ibm.com/investor"
 
 [PANW]
+name = "Palo Alto Networks"
 fiscal_year_end_month = 7
 ir_url = "https://investors.paloaltonetworks.com"
 
 [TSLA]
+name = "Tesla"
 fiscal_year_end_month = 12
 ir_url = "https://ir.tesla.com"
 
 [RDDT]
+name = "Reddit"
 fiscal_year_end_month = 12
 ir_url = "https://investor.redditinc.com"
 
 [INTC]
+name = "Intel"
 fiscal_year_end_month = 12
 ir_url = "https://www.intc.com"
 
 [AMAT]
+name = "Applied Materials"
 fiscal_year_end_month = 10
 ir_url = "https://ir.appliedmaterials.com"
 
 [LRCX]
+name = "Lam Research"
 fiscal_year_end_month = 6
 ir_url = "https://investor.lamresearch.com"
 
 [KLAC]
+name = "KLA"
 fiscal_year_end_month = 6
 ir_url = "https://ir.kla.com"
 
 [ANET]
+name = "Arista Networks"
 fiscal_year_end_month = 12
 ir_url = "https://investors.arista.com"
 
 [CRWD]
+name = "CrowdStrike"
 fiscal_year_end_month = 1
 ir_url = "https://ir.crowdstrike.com"
 
 [DELL]
+name = "Dell Technologies"
 fiscal_year_end_month = 1
 ir_url = "https://investors.delltechnologies.com"
 
 [APH]
+name = "Amphenol"
 fiscal_year_end_month = 12
 ir_url = "https://investors.amphenol.com"
 
 [APP]
+name = "AppLovin"
 fiscal_year_end_month = 12
 ir_url = "https://investors.applovin.com"
 
 [NFLX]
+name = "Netflix"
 fiscal_year_end_month = 12
 ir_url = "https://ir.netflix.net"
 
 [DIS]
+name = "Walt Disney"
 fiscal_year_end_month = 9
 ir_url = "https://thewaltdisneycompany.com/investor-relations/"
 
 [RBLX]
+name = "Roblox"
 fiscal_year_end_month = 12
 ir_url = "https://ir.roblox.com"
 
 [TTWO]
+name = "Take-Two Interactive"
 fiscal_year_end_month = 3
 ir_url = "https://ir.take2games.com"
 
 [COST]
+name = "Costco"
 fiscal_year_end_month = 8
 ir_url = "https://investor.costco.com"
 
 [WMT]
+name = "Walmart"
 fiscal_year_end_month = 1
 ir_url = "https://stock.walmart.com"
 
 [HD]
+name = "Home Depot"
 fiscal_year_end_month = 1
 ir_url = "https://ir.homedepot.com"
 
 [NKE]
+name = "Nike"
 fiscal_year_end_month = 5
 ir_url = "https://investors.nike.com"
 
 [ABNB]
+name = "Airbnb"
 fiscal_year_end_month = 12
 ir_url = "https://investors.airbnb.com"
 
 [DASH]
+name = "DoorDash"
 fiscal_year_end_month = 12
 ir_url = "https://ir.doordash.com"
 
 [CVNA]
+name = "Carvana"
 fiscal_year_end_month = 12
 ir_url = "https://investors.carvana.com"
 
 [JPM]
+name = "JPMorgan Chase"
 fiscal_year_end_month = 12
 ir_url = "https://www.jpmorganchase.com/ir"
 
 [BAC]
+name = "Bank of America"
 fiscal_year_end_month = 12
 ir_url = "https://investor.bankofamerica.com"
 
 [GS]
+name = "Goldman Sachs"
 fiscal_year_end_month = 12
 ir_url = "https://www.goldmansachs.com/investor-relations/"
 
 [V]
+name = "Visa"
 fiscal_year_end_month = 9
 ir_url = "https://investor.visa.com"
 
 [LLY]
+name = "Eli Lilly"
 fiscal_year_end_month = 12
 ir_url = "https://investor.lilly.com"
 
 [UNH]
+name = "UnitedHealth Group"
 fiscal_year_end_month = 12
 ir_url = "https://www.unitedhealthgroup.com/investors.html"
 
 [ISRG]
+name = "Intuitive Surgical"
 fiscal_year_end_month = 12
 ir_url = "https://investor.intuitive.com"
 
 [GE]
+name = "GE Aerospace"
 fiscal_year_end_month = 12
 ir_url = "https://www.ge.com/investor-relations"
 
 [GEV]
+name = "GE Vernova"
 fiscal_year_end_month = 12
 ir_url = "https://www.gevernova.com/investors"
 
 [SPCX]
+name = "SpaceX"
 fiscal_year_end_month = 12
