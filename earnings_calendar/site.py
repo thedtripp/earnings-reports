@@ -16,6 +16,7 @@ from . import ics
 
 SUBSCRIBE_URL = "https://raw.githubusercontent.com/thedtripp/earnings-reports/main/earnings.ics"
 REPO_URL = "https://github.com/thedtripp/earnings-reports"
+HOME_URL = "https://www.ddtripp.com/"
 
 _SUMMARY = re.compile(r"^(DISPUTED: )?([^ ]+) earnings, (.+?), ([^,]+)$")
 _STATUS = re.compile(r"Status: (confirmed|estimated|not reported)")
@@ -99,7 +100,7 @@ def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png")
 <meta name="description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
 <style>
 :root{{color-scheme:dark;--bg:#12101a;--card:#1b1826;--fg:#ece9f5;--muted:#a19db2;--line:#2c2839;--accent:#a78bfa;--ok:#5eead4;--warn:#fbbf24;--bad:#c4b5fd}}
-*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}}
+*{{box-sizing:border-box}}.home{{position:absolute;top:14px;left:16px;z-index:2;padding:7px 14px;border-radius:999px;background:rgba(18,16,26,.62);border:1px solid rgba(236,233,245,.22);color:#ece9f5;text-decoration:none;font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(6px)}}.home:hover{{background:rgba(18,16,26,.85);border-color:var(--accent)}}.home:focus-visible,.btn:focus-visible{{outline:2px solid var(--accent);outline-offset:2px}}body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}}
 main{{max-width:760px;margin:0 auto;padding:0 16px 48px}}
 .cover{{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;object-position:center;border-radius:0 0 14px 14px;margin:0 0 20px}}
 h1{{font-size:1.9rem;line-height:1.2;margin:8px 0 6px}}p.lede{{color:var(--muted);margin:0 0 18px}}
@@ -117,6 +118,7 @@ h2{{font-size:1.1rem;margin:0 0 10px}}
 @media (max-width:560px){{.events li{{grid-template-columns:1fr}}.side{{justify-content:flex-start}}}}
 .empty{{color:var(--muted)}}footer{{margin-top:28px;color:var(--muted);font-size:.85rem}}footer a{{color:var(--accent)}}
 </style></head><body>
+<a class="home" href="{e(HOME_URL, quote=True)}" aria-label="Back to ddtripp.com">&larr; DDTRIPP</a>
 {hero}<main>
 <h1>Earnings calendar</h1>
 <p class="lede">Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to. Updated daily.</p>
@@ -126,7 +128,7 @@ h2{{font-size:1.1rem;margin:0 0 10px}}
 <code class="url" id="url">{e(SUBSCRIBE_URL)}</code>
 <h2>Upcoming</h2>
 {body}
-<footer>Built {e(stamp)}. Dates come from Finnhub, Nasdaq and Alpha Vantage; only Nasdaq says whether a date is confirmed. Start times are approximate defaults. <a href="{e(REPO_URL, quote=True)}">How it works</a>.</footer>
+<footer>Built {e(stamp)}. Dates come from Finnhub, Nasdaq and Alpha Vantage; only Nasdaq says whether a date is confirmed. Start times are approximate defaults. <a href="{e(REPO_URL, quote=True)}">How it works</a>. <a href="{e(HOME_URL, quote=True)}">Back to ddtripp.com</a>.</footer>
 </main>
 <script>document.getElementById("copy").addEventListener("click",function(){{var b=this,t=document.getElementById("url").textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){{b.textContent="Copied"}},function(){{b.textContent="Select the URL below"}})}});</script>
 </body></html>
