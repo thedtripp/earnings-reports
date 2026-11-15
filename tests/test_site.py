@@ -51,6 +51,11 @@ class SiteTests(unittest.TestCase):
         self.assertIn("No upcoming earnings dates", page)
         self.assertIn(site.SUBSCRIBE_URL, page)
 
+    def test_links_back_to_home(self):
+        page = render()
+        self.assertIn(f'href="{site.HOME_URL}"', page)
+        self.assertIn("DDTRIPP", page)
+
     def test_no_cover_means_no_image(self):
         self.assertNotIn("<img", render(cover=None))
 
