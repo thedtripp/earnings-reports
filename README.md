@@ -1,3 +1,5 @@
+![Three data sources converge into one calendar](assets/cover.png)
+
 # Earnings calendar
 
 Keeps earnings dates for a watchlist in a standard calendar file, `earnings.ics`,
@@ -8,6 +10,7 @@ that Google Calendar (or any calendar app) can subscribe to.
   library only, no GitHub-specific code.
 - **Runtime**: a GitHub Actions job runs daily (10:41 UTC), runs the tests, runs
   the generator, and commits `earnings.ics` if it changed.
+- **Demo page**: https://www.ddtripp.com/earnings-reports/ lists the upcoming events and has a one-click subscribe button. It is rebuilt from `earnings.ics` by the same daily workflow (`build_site.py`).
 - **Subscribe** to the raw file URL, then set one reminder for the whole
   calendar in your calendar app:
   `https://raw.githubusercontent.com/thedtripp/earnings-reports/main/earnings.ics`
