@@ -1,4 +1,4 @@
-![Three data sources converge into one calendar](assets/cover.png)
+![Three data sources converge into one earnings calendar](assets/cover.png)
 
 # Earnings calendar
 

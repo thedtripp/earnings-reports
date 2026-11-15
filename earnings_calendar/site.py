@@ -98,16 +98,14 @@ def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png")
 <title>Earnings calendar</title>
 <meta name="description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
 <style>
-:root{{--bg:#f6f5f1;--card:#fff;--fg:#1c1b22;--muted:#6b6a75;--line:#e6e4dc;--accent:#5b3fd1;--ok:#0f766e;--warn:#b45309;--bad:#7c3aed}}
-@media (prefers-color-scheme:dark){{:root{{--bg:#12101a;--card:#1b1826;--fg:#ece9f5;--muted:#a19db2;--line:#2c2839;--accent:#a78bfa;--ok:#5eead4;--warn:#fbbf24;--bad:#c4b5fd}}}}
+:root{{color-scheme:dark;--bg:#12101a;--card:#1b1826;--fg:#ece9f5;--muted:#a19db2;--line:#2c2839;--accent:#a78bfa;--ok:#5eead4;--warn:#fbbf24;--bad:#c4b5fd}}
 *{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}}
 main{{max-width:760px;margin:0 auto;padding:0 16px 48px}}
 .cover{{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;object-position:center;border-radius:0 0 14px 14px;margin:0 0 20px}}
 h1{{font-size:1.9rem;line-height:1.2;margin:8px 0 6px}}p.lede{{color:var(--muted);margin:0 0 18px}}
 .actions{{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px}}
 .btn{{display:inline-block;padding:9px 16px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none;font-weight:600;font-size:.95rem;cursor:pointer}}
-.btn.primary{{background:var(--accent);border-color:var(--accent);color:#fff}}
-@media (prefers-color-scheme:dark){{.btn.primary{{color:#12101a}}}}
+.btn.primary{{background:var(--accent);border-color:var(--accent);color:#12101a}}
 code.url{{display:block;margin:0 0 28px;padding:10px 12px;border:1px dashed var(--line);border-radius:9px;color:var(--muted);font-size:.8rem;overflow-wrap:anywhere}}
 h2{{font-size:1.1rem;margin:0 0 10px}}
 .events{{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:12px}}
