@@ -23,6 +23,9 @@ def main() -> None:
     cover = ROOT / "assets" / "cover.png"
     if cover.exists():
         shutil.copy(cover, out / "cover.png")
+    share = ROOT / "assets" / "og.png"
+    if share.exists():
+        shutil.copy(share, out / "og.png")
     shutil.copy(args.ics, out / "earnings.ics")
     now = datetime.now(timezone.utc)
     (out / "index.html").write_text(

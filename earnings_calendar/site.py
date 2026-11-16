@@ -98,6 +98,12 @@ def render(rows: list[Row], built_at: datetime, cover: str | None = "cover.png")
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Earnings calendar</title>
 <meta name="description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Earnings calendar">
+<meta property="og:description" content="Earnings dates for large-cap tech, cross-checked across three sources and published as a calendar you can subscribe to.">
+<meta property="og:url" content="https://www.ddtripp.com/earnings-reports/">
+<meta property="og:image" content="https://www.ddtripp.com/earnings-reports/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{{color-scheme:dark;--bg:#12101a;--card:#1b1826;--fg:#ece9f5;--muted:#a19db2;--line:#2c2839;--accent:#a78bfa;--ok:#5eead4;--warn:#fbbf24;--bad:#c4b5fd}}
 *{{box-sizing:border-box}}.home{{position:absolute;top:14px;left:16px;z-index:2;padding:7px 14px;border-radius:999px;background:rgba(18,16,26,.62);border:1px solid rgba(236,233,245,.22);color:#ece9f5;text-decoration:none;font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(6px)}}.home:hover{{background:rgba(18,16,26,.85);border-color:var(--accent)}}.home:focus-visible,.btn:focus-visible{{outline:2px solid var(--accent);outline-offset:2px}}body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}}
