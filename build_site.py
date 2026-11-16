@@ -16,6 +16,8 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--ics", default=str(ROOT / "earnings.ics"))
     p.add_argument("--out", default=str(ROOT / "_site"))
+    p.add_argument("--watchlist", default=str(ROOT / "watchlist.txt"))
+    p.add_argument("--companies", default=str(ROOT / "companies.toml"))
     args = p.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -28,8 +30,10 @@ def main() -> None:
         shutil.copy(share, out / "og.png")
     shutil.copy(args.ics, out / "earnings.ics")
     now = datetime.now(timezone.utc)
+    rows = site.rows_from_ics(data, today=now)
+    companies = site.load_companies(Path(args.watchlist), Path(args.companies), rows)
     (out / "index.html").write_text(
-        site.render(site.rows_from_ics(data, today=now), now, "cover.png" if cover.exists() else None),
+        site.render(rows, now, "cover.png" if cover.exists() else None, companies),
         encoding="utf-8")
     print(f"wrote {out / 'index.html'}")
 
