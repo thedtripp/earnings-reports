@@ -46,6 +46,11 @@ class SiteTests(unittest.TestCase):
         self.assertNotIn("A<B", page)
         self.assertNotIn("javascript:", page)
 
+    def test_link_preview_tags(self):
+        page = render()
+        self.assertIn('property="og:image" content="https://www.ddtripp.com/earnings-reports/og.png"', page)
+        self.assertIn('name="twitter:card" content="summary_large_image"', page)
+
     def test_empty_calendar_message_and_subscribe_url(self):
         page = render()
         self.assertIn("No upcoming earnings dates", page)
