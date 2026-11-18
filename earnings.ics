@@ -8,49 +8,12 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:dis-fy2026-q4@earnings-calendar
-DTSTAMP:20261117T000000Z
-SEQUENCE:1
-SUMMARY:DIS earnings\, Q4 FY26\, before open
-DTSTART:20261117T133000Z
-DTEND:20261117T143000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: before open\; Alpha Vantage: befor
- e open.\nStart time approximate: the sources give only "before open"\, wit
- h no clock time\, so 8:30 AM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://thewaltdisneycompany.com/invest
- or-relations/
-URL:https://thewaltdisneycompany.com/investor-relations/
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:hd-fy2027-q3@earnings-calendar
-DTSTAMP:20261117T000000Z
-SEQUENCE:2
-SUMMARY:HD earnings\, Q3 FY27\, before open
-DTSTART:20261117T133000Z
-DTEND:20261117T143000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: before open\; Alpha Vantage: befor
- e open.\nStart time approximate: the sources give only "before open"\, wit
- h no clock time\, so 8:30 AM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://ir.homedepot.com
-URL:https://ir.homedepot.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:nvda-fy2027-q3@earnings-calendar
-DTSTAMP:20261117T000000Z
+UID:panw-fy2027-q1@earnings-calendar
+DTSTAMP:20261118T000000Z
 SEQUENCE:3
-SUMMARY:NVDA earnings\, Q3 FY27\, after close
-DTSTART:20261117T213000Z
-DTEND:20261117T223000Z
+SUMMARY:PANW earnings\, Q1 FY27\, after close
+DTSTART:20261118T213000Z
+DTEND:20261118T223000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
  announcement.\nRelease timing: Finnhub: after close\; Alpha Vantage: after
@@ -58,25 +21,7 @@ DESCRIPTION:Earnings release. The conference call is normally the same day\
  h no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and A
  lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
  rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://investor.nvidia.com
-URL:https://investor.nvidia.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:panw-fy2027-q1@earnings-calendar
-DTSTAMP:20261112T000000Z
-SEQUENCE:2
-SUMMARY:PANW earnings\, Q1 FY27\, after close
-DTSTART:20261118T213000Z
-DTEND:20261118T223000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
- ; Alpha Vantage: after close.\nStart time approximate: the sources give on
- ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
-  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
- daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
- nInvestor relations: https://investors.paloaltonetworks.com
+ r estimated).\nInvestor relations: https://investors.paloaltonetworks.com
 URL:https://investors.paloaltonetworks.com
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -100,19 +45,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:dell-fy2027-q3@earnings-calendar
-DTSTAMP:20261112T000000Z
-SEQUENCE:1
+DTSTAMP:20261118T000000Z
+SEQUENCE:2
 SUMMARY:DELL earnings\, Q3 FY27\, after close
 DTSTART:20261124T213000Z
 DTEND:20261124T223000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: after 
- close\; Alpha Vantage: after close.\nStart time approximate: the sources g
- ive only "after close"\, with no clock time\, so 4:30 PM EST is a default.
- \nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirme
- d (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is confi
- rmed.\nInvestor relations: https://investors.delltechnologies.com
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
+ ; Alpha Vantage: after close.\nStart time approximate: the sources give on
+ ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
+  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
+ daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
+ nInvestor relations: https://investors.delltechnologies.com
 URL:https://investors.delltechnologies.com
 TRANSP:TRANSPARENT
 END:VEVENT
