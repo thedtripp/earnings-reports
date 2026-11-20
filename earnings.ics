@@ -8,24 +8,6 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:wmt-fy2027-q3@earnings-calendar
-DTSTAMP:20261119T000000Z
-SEQUENCE:2
-SUMMARY:WMT earnings\, Q3 FY27\, before open
-DTSTART:20261119T133000Z
-DTEND:20261119T143000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: before open\; Alpha Vantage: befor
- e open.\nStart time approximate: the sources give only "before open"\, wit
- h no clock time\, so 8:30 AM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://stock.walmart.com
-URL:https://stock.walmart.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:dell-fy2027-q3@earnings-calendar
 DTSTAMP:20261118T000000Z
 SEQUENCE:2
