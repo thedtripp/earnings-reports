@@ -62,26 +62,6 @@ URL:https://investor.salesforce.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:orcl-fy2027-q2-20261209@earnings-calendar
-DTSTAMP:20261110T000000Z
-SEQUENCE:2
-SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
-DTSTART:20261209T133000Z
-DTEND:20261209T143000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Wed Dec 9\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub r
- eports Mon Dec 14\, 2026 instead (listed as a separate DISPUTED event).\nE
- arnings release. The conference call is normally the same day\, shortly af
- ter the release\; the exact call time is in the company's own announcement
- .\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not rep
- orted.\nStart time approximate: no source says whether the release is befo
- re open or after close\, so 8:30 AM EST is a placeholder.\nStatus: estimat
- ed (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nIn
- vestor relations: https://investor.oracle.com
-URL:https://investor.oracle.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:avgo-fy2026-q4@earnings-calendar
 DTSTAMP:20261112T000000Z
 SEQUENCE:1
@@ -118,54 +98,33 @@ URL:https://investor.costco.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:orcl-fy2027-q2-20261214@earnings-calendar
-DTSTAMP:20261110T000000Z
+UID:orcl-fy2027-q2@earnings-calendar
+DTSTAMP:20261121T000000Z
 SEQUENCE:0
-SUMMARY:DISPUTED: ORCL earnings\, Q2 FY27\, time not reported
-DTSTART:20261214T133000Z
-DTEND:20261214T143000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Mon Dec 14\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage 
- report Wed Dec 9\, 2026 instead (listed as a separate DISPUTED event).\nEa
- rnings release. The conference call is normally the same day\, shortly aft
- er the release\; the exact call time is in the company's own announcement.
- \nRelease timing: Finnhub: time not reported.\nStart time approximate: no 
- source says whether the release is before open or after close\, so 8:30 AM
-  EST is a placeholder.\nStatus: not reported (Finnhub does not say whether
-  the date is confirmed or estimated).\nInvestor relations: https://investo
- r.oracle.com
+SUMMARY:ORCL earnings\, Q2 FY27\, after close
+DTSTART:20261214T213000Z
+DTEND:20261214T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: after 
+ close.\nStart time approximate: the source gives only "after close"\, with
+  no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Na
+ sdaq only (Alpha Vantage has no date for this quarter).\nStatus: confirmed
+  (Nasdaq). Finnhub does not say whether the date is confirmed.\nInvestor r
+ elations: https://investor.oracle.com
 URL:https://investor.oracle.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:mu-fy2027-q1-20261215@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
-SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, after close
-DTSTART:20261215T213000Z
-DTEND:20261215T223000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Tue Dec 15\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage 
- report Wed Dec 16\, 2026 instead (listed as a separate DISPUTED event).\nE
- arnings release. The conference call is normally the same day\, shortly af
- ter the release\; the exact call time is in the company's own announcement
- .\nRelease timing: Finnhub: after close.\nStart time approximate: the sour
- ce gives only "after close"\, with no clock time\, so 4:30 PM EST is a def
- ault.\nStatus: not reported (Finnhub does not say whether the date is conf
- irmed or estimated).\nInvestor relations: https://investors.micron.com
-URL:https://investors.micron.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:mu-fy2027-q1-20261216@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:1
+DTSTAMP:20261121T000000Z
+SEQUENCE:2
 SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, time not reported
 DTSTART:20261216T133000Z
 DTEND:20261216T143000Z
 DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
  is date (Wed Dec 16\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub 
- reports Tue Dec 15\, 2026 instead (listed as a separate DISPUTED event).\n
+ reports Thu Dec 17\, 2026 instead (listed as a separate DISPUTED event).\n
  Earnings release. The conference call is normally the same day\, shortly a
  fter the release\; the exact call time is in the company's own announcemen
  t.\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not re
@@ -213,6 +172,25 @@ DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
  ted (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nI
  nvestor relations: https://investors.nike.com
 URL:https://investors.nike.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:mu-fy2027-q1-20261217@earnings-calendar
+DTSTAMP:20261121T000000Z
+SEQUENCE:0
+SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, after close
+DTSTART:20261217T213000Z
+DTEND:20261217T223000Z
+DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
+ is date (Thu Dec 17\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage 
+ report Wed Dec 16\, 2026 instead (listed as a separate DISPUTED event).\nE
+ arnings release. The conference call is normally the same day\, shortly af
+ ter the release\; the exact call time is in the company's own announcement
+ .\nRelease timing: Finnhub: after close.\nStart time approximate: the sour
+ ce gives only "after close"\, with no clock time\, so 4:30 PM EST is a def
+ ault.\nStatus: not reported (Finnhub does not say whether the date is conf
+ irmed or estimated).\nInvestor relations: https://investors.micron.com
+URL:https://investors.micron.com
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
