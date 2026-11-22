@@ -99,19 +99,19 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:orcl-fy2027-q2@earnings-calendar
-DTSTAMP:20261121T000000Z
-SEQUENCE:0
+DTSTAMP:20261122T000000Z
+SEQUENCE:1
 SUMMARY:ORCL earnings\, Q2 FY27\, after close
 DTSTART:20261214T213000Z
 DTEND:20261214T223000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
  announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: after 
- close.\nStart time approximate: the source gives only "after close"\, with
-  no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and Na
- sdaq only (Alpha Vantage has no date for this quarter).\nStatus: confirmed
-  (Nasdaq). Finnhub does not say whether the date is confirmed.\nInvestor r
- elations: https://investor.oracle.com
+ close\; Alpha Vantage: after close.\nStart time approximate: the sources g
+ ive only "after close"\, with no clock time\, so 4:30 PM EST is a default.
+ \nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirme
+ d (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is confi
+ rmed.\nInvestor relations: https://investor.oracle.com
 URL:https://investor.oracle.com
 TRANSP:TRANSPARENT
 END:VEVENT
