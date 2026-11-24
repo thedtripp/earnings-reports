@@ -9,19 +9,19 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:dell-fy2027-q3@earnings-calendar
-DTSTAMP:20261118T000000Z
-SEQUENCE:2
+DTSTAMP:20261124T000000Z
+SEQUENCE:3
 SUMMARY:DELL earnings\, Q3 FY27\, after close
 DTSTART:20261124T213000Z
 DTEND:20261124T223000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
- ; Alpha Vantage: after close.\nStart time approximate: the sources give on
- ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
-  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
- daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
- nInvestor relations: https://investors.delltechnologies.com
+ announcement.\nRelease timing: Finnhub: after close\; Alpha Vantage: after
+  close.\nStart time approximate: the sources give only "after close"\, wit
+ h no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and A
+ lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
+ rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
+ r estimated).\nInvestor relations: https://investors.delltechnologies.com
 URL:https://investors.delltechnologies.com
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -116,26 +116,6 @@ URL:https://investor.oracle.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:mu-fy2027-q1-20261216@earnings-calendar
-DTSTAMP:20261121T000000Z
-SEQUENCE:2
-SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, time not reported
-DTSTART:20261216T133000Z
-DTEND:20261216T143000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Wed Dec 16\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub 
- reports Thu Dec 17\, 2026 instead (listed as a separate DISPUTED event).\n
- Earnings release. The conference call is normally the same day\, shortly a
- fter the release\; the exact call time is in the company's own announcemen
- t.\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not re
- ported.\nStart time approximate: no source says whether the release is bef
- ore open or after close\, so 8:30 AM EST is a placeholder.\nStatus: estima
- ted (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nI
- nvestor relations: https://investors.micron.com
-URL:https://investors.micron.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:nke-fy2027-q2-20261216@earnings-calendar
 DTSTAMP:20261106T000000Z
 SEQUENCE:0
@@ -155,42 +135,41 @@ URL:https://investors.nike.com
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:nke-fy2027-q2-20261217@earnings-calendar
-DTSTAMP:20261106T000000Z
+UID:mu-fy2027-q1@earnings-calendar
+DTSTAMP:20261124T000000Z
 SEQUENCE:0
-SUMMARY:DISPUTED: NKE earnings\, Q2 FY27\, time not reported
-DTSTART:20261217T133000Z
-DTEND:20261217T143000Z
+SUMMARY:MU earnings\, Q1 FY27\, after close
+DTSTART:20261217T213000Z
+DTEND:20261217T223000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Finnhub: after close\; Nasdaq: after close\
+ ; Alpha Vantage: after close.\nStart time approximate: the sources give on
+ ly "after close"\, with no clock time\, so 4:30 PM EST is a default.\nDate
+  source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirmed (Nas
+ daq). Finnhub and Alpha Vantage do not say whether the date is confirmed.\
+ nInvestor relations: https://investors.micron.com
+URL:https://investors.micron.com
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:nke-fy2027-q2-20261217@earnings-calendar
+DTSTAMP:20261124T000000Z
+SEQUENCE:1
+SUMMARY:DISPUTED: NKE earnings\, Q2 FY27\, after close
+DTSTART:20261217T213000Z
+DTEND:20261217T223000Z
 DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
  is date (Thu Dec 17\, 2026) comes from Nasdaq and Alpha Vantage.\nFinnhub 
  reports Wed Dec 16\, 2026 instead (listed as a separate DISPUTED event).\n
  Earnings release. The conference call is normally the same day\, shortly a
  fter the release\; the exact call time is in the company's own announcemen
- t.\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: time not re
- ported.\nStart time approximate: no source says whether the release is bef
- ore open or after close\, so 8:30 AM EST is a placeholder.\nStatus: estima
- ted (Nasdaq). Alpha Vantage does not say whether the date is confirmed.\nI
- nvestor relations: https://investors.nike.com
+ t.\nRelease timing: Nasdaq: after close\; Alpha Vantage: after close.\nSta
+ rt time approximate: the sources give only "after close"\, with no clock t
+ ime\, so 4:30 PM EST is a default.\nStatus: confirmed (Nasdaq). Alpha Vant
+ age does not say whether the date is confirmed.\nInvestor relations: https
+ ://investors.nike.com
 URL:https://investors.nike.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:mu-fy2027-q1-20261217@earnings-calendar
-DTSTAMP:20261121T000000Z
-SEQUENCE:0
-SUMMARY:DISPUTED: MU earnings\, Q1 FY27\, after close
-DTSTART:20261217T213000Z
-DTEND:20261217T223000Z
-DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
- is date (Thu Dec 17\, 2026) comes from Finnhub.\nNasdaq and Alpha Vantage 
- report Wed Dec 16\, 2026 instead (listed as a separate DISPUTED event).\nE
- arnings release. The conference call is normally the same day\, shortly af
- ter the release\; the exact call time is in the company's own announcement
- .\nRelease timing: Finnhub: after close.\nStart time approximate: the sour
- ce gives only "after close"\, with no clock time\, so 4:30 PM EST is a def
- ault.\nStatus: not reported (Finnhub does not say whether the date is conf
- irmed or estimated).\nInvestor relations: https://investors.micron.com
-URL:https://investors.micron.com
 TRANSP:TRANSPARENT
 END:VEVENT
 END:VCALENDAR
