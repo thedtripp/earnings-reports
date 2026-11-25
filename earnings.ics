@@ -8,38 +8,20 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
-UID:dell-fy2027-q3@earnings-calendar
-DTSTAMP:20261124T000000Z
-SEQUENCE:3
-SUMMARY:DELL earnings\, Q3 FY27\, after close
-DTSTART:20261124T213000Z
-DTEND:20261124T223000Z
-DESCRIPTION:Earnings release. The conference call is normally the same day\
- , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: after close\; Alpha Vantage: after
-  close.\nStart time approximate: the sources give only "after close"\, wit
- h no clock time\, so 4:30 PM EST is a default.\nDate source: Finnhub and A
- lpha Vantage only (Nasdaq has no date for this quarter).\nStatus: not repo
- rted (Finnhub and Alpha Vantage do not say whether the date is confirmed o
- r estimated).\nInvestor relations: https://investors.delltechnologies.com
-URL:https://investors.delltechnologies.com
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:crwd-fy2027-q3@earnings-calendar
-DTSTAMP:20261106T000000Z
-SEQUENCE:0
-SUMMARY:CRWD earnings\, Q3 FY27\, after close
-DTSTART:20261201T213000Z
-DTEND:20261201T223000Z
+DTSTAMP:20261125T000000Z
+SEQUENCE:1
+SUMMARY:CRWD earnings\, Q3 FY27\, time not reported
+DTSTART:20261201T133000Z
+DTEND:20261201T143000Z
 DESCRIPTION:Earnings release. The conference call is normally the same day\
  , shortly after the release\; the exact call time is in the company's own 
- announcement.\nRelease timing: Finnhub: time not reported\; Nasdaq: after 
- close\; Alpha Vantage: after close.\nStart time approximate: the sources g
- ive only "after close"\, with no clock time\, so 4:30 PM EST is a default.
- \nDate source: Finnhub\, Nasdaq and Alpha Vantage agree.\nStatus: confirme
- d (Nasdaq). Finnhub and Alpha Vantage do not say whether the date is confi
- rmed.\nInvestor relations: https://ir.crowdstrike.com
+ announcement.\nRelease timing: Finnhub: time not reported.\nStart time app
+ roximate: no source says whether the release is before open or after close
+ \, so 8:30 AM EST is a placeholder.\nDate source: Finnhub only (Nasdaq and
+  Alpha Vantage have no date for this quarter).\nStatus: not reported (Finn
+ hub does not say whether the date is confirmed or estimated).\nInvestor re
+ lations: https://ir.crowdstrike.com
 URL:https://ir.crowdstrike.com
 TRANSP:TRANSPARENT
 END:VEVENT
