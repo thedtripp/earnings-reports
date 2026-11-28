@@ -154,4 +154,22 @@ DESCRIPTION:DISPUTED: the sources disagree on the date of this release.\nTh
 URL:https://investors.nike.com
 TRANSP:TRANSPARENT
 END:VEVENT
+BEGIN:VEVENT
+UID:jpm-fy2026-q4@earnings-calendar
+DTSTAMP:20261128T000000Z
+SEQUENCE:0
+SUMMARY:JPM earnings\, Q4 FY26\, time not reported
+DTSTART:20270112T133000Z
+DTEND:20270112T143000Z
+DESCRIPTION:Earnings release. The conference call is normally the same day\
+ , shortly after the release\; the exact call time is in the company's own 
+ announcement.\nRelease timing: Nasdaq: time not reported\; Alpha Vantage: 
+ time not reported.\nStart time approximate: no source says whether the rel
+ ease is before open or after close\, so 8:30 AM EST is a placeholder.\nDat
+ e source: Nasdaq and Alpha Vantage only (Finnhub has no date for this quar
+ ter).\nStatus: estimated (Nasdaq). Alpha Vantage does not say whether the 
+ date is confirmed.\nInvestor relations: https://www.jpmorganchase.com/ir
+URL:https://www.jpmorganchase.com/ir
+TRANSP:TRANSPARENT
+END:VEVENT
 END:VCALENDAR
